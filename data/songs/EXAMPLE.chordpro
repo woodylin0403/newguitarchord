@@ -1,0 +1,20 @@
+# 這是格式範例檔，檔名不對應任何 slug，所以不會被網站顯示。
+# 實際歌曲請存成 data/songs/<slug>.chordpro，例如 data/songs/d-55.chordpro
+# slug = 原調小寫 + "-" + 該調序號（見 songs.json）。
+
+{title: 範例詩歌}
+{key: D}
+{capo: 2}
+{time: 4/4}
+
+# 主歌：[和弦] 直接寫在對應的字前面
+[D]這是範例歌詞第一行 [A]示範和弦怎麼[Bm]標
+[G]第二行歌詞繼續 [D]寫 副歌前的最[A]後一句
+
+{start_of_chorus: 副歌}
+{comment: 稍慢、輕聲}
+[G]副歌第一句 [D]標在字上
+[A]副歌第二句 [D]回到主和[A]弦
+{end_of_chorus}
+
+[D]尾句歌詞 收在原調 [D]

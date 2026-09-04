@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────────────────────────
+   Two visual worlds the reader can switch between:
+     light = 「微光」 warm off-white ground, sage accent, soft shadows, round
+     dark  = 「台上」 near-black ground, gold accent, flatter, tighter
+   Components reference these via semantic Tailwind utilities
+   (bg-surface, text-muted, border-border, text-accent …) — never hard-coded.
+
+   Theme resolution (mirrors the standard three-state pattern):
+     :root                                   → light
+     @media (dark) :root:not([data-theme=light]) → dark when OS is dark
+     :root[data-theme="dark"]                 → dark, explicit
+     :root[data-theme="light"]               → light, explicit (uses :root) */
+
+:root {
+  --background: #f5f4ee;
+  --surface: #ffffff;
+  --surface-2: #eae9df;
+  --foreground: #26302a;
+  --muted: #6f7a72;
+  --border: #dfe0d6;
+  --border-strong: #cdd0c2;
+  --accent: #46795a;
+  --accent-soft: #e4ede4;
+  --accent-contrast: #f3f7f2;
+  --ring: #46795a;
+  --shadow: 0 10px 30px -18px rgba(40, 60, 45, 0.35);
+  --radius: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --background: #0e0e10;
+    --surface: #1a1b19;
+    --surface-2: #232320;
+    --foreground: #f0efe9;
+    --muted: #8f8d84;
+    --border: #2a2a2d;
+    --border-strong: #3b3b3e;
+    --accent: #e7b23c;
+    --accent-soft: rgba(231, 178, 60, 0.12);
+    --accent-contrast: #1a1400;
+    --ring: #e7b23c;
+    --shadow: none;
+    --radius: 0.875rem;
+  }
+}
+
+:root[data-theme="dark"] {
+  --background: #0e0e10;
+  --surface: #1a1b19;
+  --surface-2: #232320;
+  --foreground: #f0efe9;
+  --muted: #8f8d84;
+  --border: #2a2a2d;
+  --border-strong: #3b3b3e;
+  --accent: #e7b23c;
+  --accent-soft: rgba(231, 178, 60, 0.12);
+  --accent-contrast: #1a1400;
+  --ring: #e7b23c;
+  --shadow: none;
+  --radius: 0.875rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-ring: var(--ring);
+  --font-display: var(--font-fraunces), "Songti TC", "Noto Serif TC", Georgia,
+    serif;
+  --font-sans: var(--font-figtree), "PingFang TC", "Noto Sans TC",
+    "Microsoft JhengHei", "Hiragino Sans GB", sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+  color-scheme: light dark;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+/* Soft-look elevation — a no-op in the dark theme (--shadow: none). */
+.elevate {
+  box-shadow: var(--shadow);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ── Chord chart rendering ────────────────────────────────────────────────
+   A lyric line with chord symbols floating above each syllable. Lines with
+   no chords keep the same height so verses stay evenly spaced.
+   Everything inside `.chart` scales with the reader's --song-scale. */
+
+.chart {
+  font-size: calc(1rem * var(--song-scale, 1));
+}
+.chart .song-comment {
+  font-size: 0.875em;
+}
+.songline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-block: 0.1em;
+  min-height: 2.75em;
+}
+.songline > span {
+  display: inline-flex;
+  flex-direction: column;
+}
+.songline .chord {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.8em;
+  line-height: 1.25;
+  color: var(--accent);
+  white-space: nowrap;
+  min-width: 1ch;
+}
+.songline .lyric {
+  white-space: pre-wrap;
+  font-size: 1.0625em;
+}
+/* a chord sitting on a blank gap — widened to hold the chord */
+.songline .lyric .gap {
+  display: inline-block;
+}
+/* editor preview: make the chord-on-blank gap visible */
+.songline .lyric .ws {
+  border-bottom: 1px dotted var(--accent);
+  opacity: 0.7;
+}

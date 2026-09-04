@@ -1,0 +1,2103 @@
+[
+ {
+  "book_page": 1,
+  "images": [
+   "P01_L1.png",
+   "P01_L2.png",
+   "P01_L3.png",
+   "P01_L4.png",
+   "P01_L5.png",
+   "P01_R1.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "C-1",
+    "title": "舉目仰望"
+   },
+   {
+    "song_id": "C-2",
+    "title": "每當我瞻仰你"
+   },
+   {
+    "song_id": "C-3",
+    "title": "讚美救主耶穌"
+   },
+   {
+    "song_id": "C-4",
+    "title": "我的心哪來稱頌主"
+   },
+   {
+    "song_id": "C-5",
+    "title": "耶穌耶穌我心樂歌"
+   },
+   {
+    "song_id": "C-6",
+    "title": "我留下平安"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 2,
+  "images": [
+   "P02_L1.png",
+   "P02_L2.png",
+   "P02_L3.png",
+   "P02_L4.png",
+   "P02_L5.png",
+   "P02_R1.png",
+   "P02_R2.png",
+   "P02_R3.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "C-7",
+    "title": "機遇"
+   },
+   {
+    "song_id": "C-8",
+    "title": "主啊!是否是我"
+   },
+   {
+    "song_id": "C-9",
+    "title": "彼此相愛"
+   },
+   {
+    "song_id": "C-10",
+    "title": "像我這樣"
+   },
+   {
+    "song_id": "C-11",
+    "title": "我知誰掌管明天"
+   },
+   {
+    "song_id": "C-12",
+    "title": "慈愛牧者"
+   },
+   {
+    "song_id": "C-13",
+    "title": "你是我的神"
+   },
+   {
+    "song_id": "C-14",
+    "title": "親近更親近"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 3,
+  "images": [
+   "P03_L1.png",
+   "P03_L2.png",
+   "P03_L3.png",
+   "P03_L4.png",
+   "P03_L5.png",
+   "P03_R1.png",
+   "P03_R2.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "C-15",
+    "title": "領我啊 領我"
+   },
+   {
+    "song_id": "C-16",
+    "title": "朋友!你心中有平安喜樂嗎?"
+   },
+   {
+    "song_id": "C-17",
+    "title": "無限恩典"
+   },
+   {
+    "song_id": "C-18",
+    "title": "先求他的國"
+   },
+   {
+    "song_id": "C-19",
+    "title": "深信所知"
+   },
+   {
+    "song_id": "C-20",
+    "title": "微聲盼望"
+   },
+   {
+    "song_id": "C-21",
+    "title": "耶穌給你平安"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 4,
+  "images": [
+   "P04_L1.png",
+   "P04_L2.png",
+   "P04_L3.png",
+   "P04_L4.png",
+   "P04_L5.png",
+   "P04_R1.png"
+  ],
+  "full_page": "page_P04.png",
+  "candidates": [
+   {
+    "song_id": "C-22",
+    "title": "媽媽的喜歡"
+   },
+   {
+    "song_id": "C-23",
+    "title": "有一恩手"
+   },
+   {
+    "song_id": "C-24",
+    "title": "空虛美夢"
+   },
+   {
+    "song_id": "C-25",
+    "title": "年輕人"
+   },
+   {
+    "song_id": "C-26",
+    "title": "耶穌的愛真是奇妙"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 5,
+  "images": [
+   "P05_L1.png",
+   "P05_L2.png",
+   "P05_L3.png",
+   "P05_L4.png",
+   "P05_L5.png",
+   "P05_R1.png",
+   "P05_R2.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "C-27",
+    "title": "開啟雙眼"
+   },
+   {
+    "song_id": "C-28",
+    "title": "願神興起"
+   },
+   {
+    "song_id": "C-29",
+    "title": "主如明亮晨星"
+   },
+   {
+    "song_id": "C-30",
+    "title": "若"
+   },
+   {
+    "song_id": "C-31",
+    "title": "兩個主"
+   },
+   {
+    "song_id": "C-32",
+    "title": "我要仰望耶和華"
+   },
+   {
+    "song_id": "C-33",
+    "title": "我尊崇主聖名"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 6,
+  "images": [
+   "P06_L1.png",
+   "P06_L2.png",
+   "P06_L3.png",
+   "P06_L4.png",
+   "P06_L5.png",
+   "P06_R1.png",
+   "P06_R2.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "C-34",
+    "title": "我找真愛"
+   },
+   {
+    "song_id": "C-35",
+    "title": "犧牲的愛"
+   },
+   {
+    "song_id": "C-36",
+    "title": "聖靈 我們真歡迎你"
+   },
+   {
+    "song_id": "C-37",
+    "title": "你坐在父神右邊"
+   },
+   {
+    "song_id": "C-38",
+    "title": "更新我心意"
+   },
+   {
+    "song_id": "C-39",
+    "title": "我們當省察內心"
+   },
+   {
+    "song_id": "C-40",
+    "title": "以馬內利"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 7,
+  "images": [
+   "P07_L1.png",
+   "P07_L2.png",
+   "P07_L3.png",
+   "P07_L4.png",
+   "P07_L5.png",
+   "P07_L6.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "C-41",
+    "title": "人們需要主"
+   },
+   {
+    "song_id": "C-42",
+    "title": "我知道我救贖主活著"
+   },
+   {
+    "song_id": "C-43",
+    "title": "天國在你心裡"
+   },
+   {
+    "song_id": "C-44",
+    "title": "頌讚全能上帝"
+   },
+   {
+    "song_id": "C-45",
+    "title": "我懇求主"
+   },
+   {
+    "song_id": "C-46",
+    "title": "願你崇高"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 8,
+  "images": [
+   "P08_L1.png",
+   "P08_L2.png",
+   "P08_L3.png",
+   "P08_L4.png",
+   "P08_L5.png",
+   "P08_L6.png",
+   "P08_L7.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "C-47",
+    "title": "拯救衣"
+   },
+   {
+    "song_id": "C-48",
+    "title": "我的力量 我的山寨"
+   },
+   {
+    "song_id": "C-49",
+    "title": "詩篇十九篇"
+   },
+   {
+    "song_id": "C-50",
+    "title": "每一步"
+   },
+   {
+    "song_id": "C-51",
+    "title": "沒有難成的事"
+   },
+   {
+    "song_id": "C-52",
+    "title": "你的寶血"
+   },
+   {
+    "song_id": "C-53",
+    "title": "耶穌我愛你"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 9,
+  "images": [
+   "P09_L1.png",
+   "P09_L2.png",
+   "P09_L3.png",
+   "P09_L4.png",
+   "P09_L5.png",
+   "P09_R1.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "C-54",
+    "title": "你是我愛我歌"
+   },
+   {
+    "song_id": "C-55",
+    "title": "來看祂"
+   },
+   {
+    "song_id": "C-56",
+    "title": "你真偉大"
+   },
+   {
+    "song_id": "C-57",
+    "title": "同來看主耶穌的榮美"
+   },
+   {
+    "song_id": "C-58",
+    "title": "一群大能的子民"
+   },
+   {
+    "song_id": "C-59",
+    "title": "在主裡的時刻"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 10,
+  "images": [
+   "P10_L1.png",
+   "P10_L2.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "C-60",
+    "title": "從前所珍愛"
+   },
+   {
+    "song_id": "C-61",
+    "title": "被救贖的百姓"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 11,
+  "images": [
+   "P11_L1.png",
+   "P11_L2.png",
+   "P11_L3.png",
+   "P11_L4.png",
+   "P11_L5.png",
+   "P11_R1.png",
+   "P11_R2.png",
+   "P11_R3.png"
+  ],
+  "full_page": "page_P11.png",
+  "candidates": [
+   {
+    "song_id": "Am-1",
+    "title": "哈利路亞 我的主"
+   },
+   {
+    "song_id": "Am-2",
+    "title": "讚美主哈利路亞"
+   },
+   {
+    "song_id": "Am-3",
+    "title": "你是我藏身處"
+   },
+   {
+    "song_id": "Am-4",
+    "title": "唱哈利路亞"
+   },
+   {
+    "song_id": "Am-5",
+    "title": "倚靠耶和華"
+   },
+   {
+    "song_id": "Am-6",
+    "title": "到神的祭壇"
+   },
+   {
+    "song_id": "Am-7",
+    "title": "奇妙真神"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 12,
+  "images": [
+   "P12_L1.png",
+   "P12_L2.png",
+   "P12_L3.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "Am-8",
+    "title": "信靠耶和華的人"
+   },
+   {
+    "song_id": "Am-9",
+    "title": "你為何空虛"
+   },
+   {
+    "song_id": "Am-10",
+    "title": "詩篇138:1-7"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 13,
+  "images": [
+   "P13_L1.png",
+   "P13_R1.png",
+   "P13_R2.png",
+   "P13_R3.png"
+  ],
+  "full_page": "page_P13.png",
+  "candidates": [
+   {
+    "song_id": "D-1",
+    "title": "平安之王"
+   },
+   {
+    "song_id": "D-2",
+    "title": "主啊 我深願"
+   },
+   {
+    "song_id": "D-3",
+    "title": "神愛你"
+   },
+   {
+    "song_id": "D-4",
+    "title": "榮耀神羔羊"
+   },
+   {
+    "song_id": "D-5",
+    "title": "萬國都要來讚美主"
+   },
+   {
+    "song_id": "D-6",
+    "title": "超越過一切"
+   },
+   {
+    "song_id": "D-7",
+    "title": "神哪!我願順從你"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 14,
+  "images": [
+   "P14_L1.png",
+   "P14_L2.png",
+   "P14_L3.png",
+   "P14_L4.png",
+   "P14_L5.png",
+   "P14_L6.png",
+   "P14_L7.png",
+   "P14_R1.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "D-8",
+    "title": "榮耀君王我們尊崇你"
+   },
+   {
+    "song_id": "D-9",
+    "title": "你慈愛何等寶貴"
+   },
+   {
+    "song_id": "D-10",
+    "title": "手之歌"
+   },
+   {
+    "song_id": "D-11",
+    "title": "當我進入他的門"
+   },
+   {
+    "song_id": "D-12",
+    "title": "軟化我心"
+   },
+   {
+    "song_id": "D-13",
+    "title": "歡樂像雨點"
+   },
+   {
+    "song_id": "D-14",
+    "title": "為什麼"
+   },
+   {
+    "song_id": "D-15",
+    "title": "每日要禱告主"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 15,
+  "images": [
+   "P15_L1.png",
+   "P15_L2.png",
+   "P15_R1.png",
+   "P15_R2.png",
+   "P15_R3.png"
+  ],
+  "full_page": "page_P15.png",
+  "candidates": [
+   {
+    "song_id": "D-16",
+    "title": "為了愛"
+   },
+   {
+    "song_id": "D-17",
+    "title": "我有明天"
+   },
+   {
+    "song_id": "D-18",
+    "title": "別無他名"
+   },
+   {
+    "song_id": "D-19",
+    "title": "靈裡生活"
+   },
+   {
+    "song_id": "D-20",
+    "title": "耶穌愛你"
+   },
+   {
+    "song_id": "D-21",
+    "title": "我要屈膝敬拜"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 16,
+  "images": [
+   "P16_L1.png",
+   "P16_L2.png",
+   "P16_L3.png",
+   "P16_L4.png",
+   "P16_L5.png",
+   "P16_R1.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "D-22",
+    "title": "全然向你"
+   },
+   {
+    "song_id": "D-23",
+    "title": "必有恩惠與慈愛"
+   },
+   {
+    "song_id": "D-24",
+    "title": "我寧願有耶穌"
+   },
+   {
+    "song_id": "D-25",
+    "title": "我要歌頌 我要讚美"
+   },
+   {
+    "song_id": "D-26",
+    "title": "偉大奇妙神"
+   },
+   {
+    "song_id": "D-27",
+    "title": "兩個環"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 17,
+  "images": [
+   "P17_L1.png",
+   "P17_L2.png",
+   "P17_L3.png",
+   "P17_L4.png",
+   "P17_L5.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "D-28",
+    "title": "我主基督已經得勝"
+   },
+   {
+    "song_id": "D-29",
+    "title": "讓神兒子的愛圍繞你"
+   },
+   {
+    "song_id": "D-30",
+    "title": "我已被贖回"
+   },
+   {
+    "song_id": "D-31",
+    "title": "神是愛"
+   },
+   {
+    "song_id": "D-32",
+    "title": "頌讚主的慈愛"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 18,
+  "images": [
+   "P18_L1.png",
+   "P18_L2.png",
+   "P18_L3.png",
+   "P18_L4.png",
+   "P18_R1.png",
+   "P18_R2.png",
+   "P18_R3.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "D-33",
+    "title": "我是主羊"
+   },
+   {
+    "song_id": "D-34",
+    "title": "傳給人"
+   },
+   {
+    "song_id": "D-35",
+    "title": "感謝耶穌"
+   },
+   {
+    "song_id": "D-36",
+    "title": "主啊!求你差遣我"
+   },
+   {
+    "song_id": "D-37",
+    "title": "道路 真理 生命"
+   },
+   {
+    "song_id": "D-38",
+    "title": "救主正在等待"
+   },
+   {
+    "song_id": "D-39",
+    "title": "在這時候"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 19,
+  "images": [
+   "P19_L1.png",
+   "P19_L2.png",
+   "P19_R1.png",
+   "P19_R2.png",
+   "P19_R3.png"
+  ],
+  "full_page": "page_P19.png",
+  "candidates": [
+   {
+    "song_id": "D-40",
+    "title": "主愛有多少"
+   },
+   {
+    "song_id": "D-41",
+    "title": "我曾服在耶穌腳下"
+   },
+   {
+    "song_id": "D-42",
+    "title": "我必須有主"
+   },
+   {
+    "song_id": "D-43",
+    "title": "信賴耶穌心中就有平安"
+   },
+   {
+    "song_id": "D-44",
+    "title": "我知我何往"
+   },
+   {
+    "song_id": "D-45",
+    "title": "草鞋"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 20,
+  "images": [
+   "P20_L1.png",
+   "P20_L2.png",
+   "P20_L3.png",
+   "P20_R1.png",
+   "P20_R2.png",
+   "P20_R3.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "D-46",
+    "title": "禱"
+   },
+   {
+    "song_id": "D-47",
+    "title": "願耶和華賜福與你"
+   },
+   {
+    "song_id": "D-48",
+    "title": "在這個時刻"
+   },
+   {
+    "song_id": "D-49",
+    "title": "來向主歌唱"
+   },
+   {
+    "song_id": "D-50",
+    "title": "永在我心"
+   },
+   {
+    "song_id": "D-51",
+    "title": "願我就近聖靈江河"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 21,
+  "images": [
+   "P21_L1.png",
+   "P21_L2.png",
+   "P21_L3.png",
+   "P21_R1.png",
+   "P21_R2.png",
+   "P21_R3.png",
+   "P21_R4.png"
+  ],
+  "full_page": "page_P21.png",
+  "candidates": [
+   {
+    "song_id": "D-52",
+    "title": "神的聖靈"
+   },
+   {
+    "song_id": "D-53",
+    "title": "讚美祭"
+   },
+   {
+    "song_id": "D-54",
+    "title": "不忘主愛"
+   },
+   {
+    "song_id": "D-55",
+    "title": "如鹿切慕溪水"
+   },
+   {
+    "song_id": "D-56",
+    "title": "全能的上帝"
+   },
+   {
+    "song_id": "D-57",
+    "title": "忠心順服歌"
+   },
+   {
+    "song_id": "D-58",
+    "title": "天父 阿爸天父"
+   },
+   {
+    "song_id": "D-59",
+    "title": "開我的眼 主"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 22,
+  "images": [
+   "P22_L1.png",
+   "P22_L2.png",
+   "P22_L3.png",
+   "P22_L4.png",
+   "P22_L5.png",
+   "P22_R1.png",
+   "P22_R2.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "D-60",
+    "title": "主啊!你是盾牌環繞我"
+   },
+   {
+    "song_id": "D-61",
+    "title": "差遣我"
+   },
+   {
+    "song_id": "D-62",
+    "title": "看祂榮耀"
+   },
+   {
+    "song_id": "D-63",
+    "title": "這裡有神的同在"
+   },
+   {
+    "song_id": "D-64",
+    "title": "主的喜樂是我的力量"
+   },
+   {
+    "song_id": "D-65",
+    "title": "我要歌頌"
+   },
+   {
+    "song_id": "D-66",
+    "title": "主 我們再來你面前"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 23,
+  "images": [
+   "P23_L1.png",
+   "P23_L2.png",
+   "P23_L3.png",
+   "P23_L4.png",
+   "P23_L5.png"
+  ],
+  "full_page": "page_P23.png",
+  "candidates": [
+   {
+    "song_id": "D-67",
+    "title": "我就是來讚美主"
+   },
+   {
+    "song_id": "D-68",
+    "title": "前進"
+   },
+   {
+    "song_id": "D-69",
+    "title": "只要想到你聖名"
+   },
+   {
+    "song_id": "D-70",
+    "title": "我永不再是"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 24,
+  "images": [
+   "P24_L1.png",
+   "P24_L2.png",
+   "P24_L3.png",
+   "P24_L4.png",
+   "P24_L5.png",
+   "P24_L6.png",
+   "P24_R1.png",
+   "P24_R2.png",
+   "P24_R3.png"
+  ],
+  "full_page": "page_P24.png",
+  "candidates": [
+   {
+    "song_id": "E-1",
+    "title": "你是榮耀君王"
+   },
+   {
+    "song_id": "E-2",
+    "title": "求充滿我"
+   },
+   {
+    "song_id": "E-3",
+    "title": "我們高舉雙手"
+   },
+   {
+    "song_id": "E-4",
+    "title": "父神 我敬拜你"
+   },
+   {
+    "song_id": "E-5",
+    "title": "祂已被尊崇"
+   },
+   {
+    "song_id": "E-6",
+    "title": "三一頌"
+   },
+   {
+    "song_id": "E-7",
+    "title": "耶穌降世為你"
+   },
+   {
+    "song_id": "E-8",
+    "title": "神啊 求你鑑察"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 25,
+  "images": [
+   "P25_L1.png",
+   "P25_L2.png",
+   "P25_L3.png",
+   "P25_L4.png",
+   "P25_R1.png",
+   "P25_R2.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "E-9",
+    "title": "惟有你"
+   },
+   {
+    "song_id": "E-10",
+    "title": "拯救我國"
+   },
+   {
+    "song_id": "E-11",
+    "title": "我們讚美你"
+   },
+   {
+    "song_id": "E-12",
+    "title": "我們是你的百姓"
+   },
+   {
+    "song_id": "E-13",
+    "title": "天父我來就近你"
+   },
+   {
+    "song_id": "E-14",
+    "title": "我用主的愛"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 26,
+  "images": [
+   "P26_L1.png",
+   "P26_L2.png",
+   "P26_L3.png",
+   "P26_R1.png",
+   "P26_R2.png",
+   "P26_R3.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "E-15",
+    "title": "感謝我們復活主"
+   },
+   {
+    "song_id": "E-16",
+    "title": "靠著耶穌的名"
+   },
+   {
+    "song_id": "E-17",
+    "title": "仰望救主"
+   },
+   {
+    "song_id": "E-18",
+    "title": "每一天"
+   },
+   {
+    "song_id": "E-19",
+    "title": "請你跟我來"
+   },
+   {
+    "song_id": "E-20",
+    "title": "箴言三:5-6"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 27,
+  "images": [
+   "P27_L1.png",
+   "P27_R1.png",
+   "P27_R2.png"
+  ],
+  "full_page": "page_P27.png",
+  "candidates": [
+   {
+    "song_id": "E-21",
+    "title": "多一點喜樂"
+   },
+   {
+    "song_id": "E-22",
+    "title": "復興你工"
+   },
+   {
+    "song_id": "E-23",
+    "title": "神真美好"
+   },
+   {
+    "song_id": "E-24",
+    "title": "這一天"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 28,
+  "images": [
+   "P28_L1.png",
+   "P28_L2.png",
+   "P28_L3.png",
+   "P28_L4.png",
+   "P28_L5.png",
+   "P28_L6.png",
+   "P28_L7.png",
+   "P28_L8.png",
+   "P28_R1.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "F-1",
+    "title": "來讚美祂"
+   },
+   {
+    "song_id": "F-2",
+    "title": "榮耀歸祂"
+   },
+   {
+    "song_id": "F-3",
+    "title": "全心來讚美你"
+   },
+   {
+    "song_id": "F-4",
+    "title": "歡呼主耶穌"
+   },
+   {
+    "song_id": "F-5",
+    "title": "何等尊貴"
+   },
+   {
+    "song_id": "F-6",
+    "title": "尊崇主耶和華"
+   },
+   {
+    "song_id": "F-7",
+    "title": "祂是萬王之王"
+   },
+   {
+    "song_id": "F-8",
+    "title": "從太陽出來之地"
+   },
+   {
+    "song_id": "F-9",
+    "title": "和散那"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 29,
+  "images": [
+   "P29_L1.png",
+   "P29_L2.png",
+   "P29_L3.png",
+   "P29_L4.png",
+   "P29_L5.png",
+   "P29_L6.png",
+   "P29_L7.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "F-10",
+    "title": "你是榮耀君王"
+   },
+   {
+    "song_id": "F-11",
+    "title": "不再定罪"
+   },
+   {
+    "song_id": "F-12",
+    "title": "來慶賀主耶穌"
+   },
+   {
+    "song_id": "F-13",
+    "title": "當轉眼仰望耶穌"
+   },
+   {
+    "song_id": "F-14",
+    "title": "最大的財富"
+   },
+   {
+    "song_id": "F-15",
+    "title": "進入幔內"
+   },
+   {
+    "song_id": "F-16",
+    "title": "當趁著年輕"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 30,
+  "images": [
+   "P30_L1.png",
+   "P30_L2.png",
+   "P30_L3.png",
+   "P30_L4.png",
+   "P30_L5.png",
+   "P30_R1.png",
+   "P30_R2.png",
+   "P30_R3.png",
+   "P30_R4.png"
+  ],
+  "full_page": "page_P30.png",
+  "candidates": [
+   {
+    "song_id": "F-17",
+    "title": "全心讚美"
+   },
+   {
+    "song_id": "F-18",
+    "title": "耶穌正在這裡"
+   },
+   {
+    "song_id": "F-19",
+    "title": "合而為一"
+   },
+   {
+    "song_id": "F-20",
+    "title": "主是平安"
+   },
+   {
+    "song_id": "F-21",
+    "title": "祂感動我"
+   },
+   {
+    "song_id": "F-22",
+    "title": "活出生命的色彩"
+   },
+   {
+    "song_id": "F-23",
+    "title": "全能醫治者"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 31,
+  "images": [
+   "P31_L1.png",
+   "P31_L2.png",
+   "P31_L3.png",
+   "P31_L4.png",
+   "P31_R1.png",
+   "P31_R2.png",
+   "P31_R3.png",
+   "P31_R4.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "F-24",
+    "title": "再給我一次機會"
+   },
+   {
+    "song_id": "F-25",
+    "title": "獻上活祭"
+   },
+   {
+    "song_id": "F-26",
+    "title": "湧出活水"
+   },
+   {
+    "song_id": "F-27",
+    "title": "活水湧流"
+   },
+   {
+    "song_id": "F-28",
+    "title": "我們又在一起"
+   },
+   {
+    "song_id": "F-29",
+    "title": "我願成為主的喜樂"
+   },
+   {
+    "song_id": "F-30",
+    "title": "倚靠祂救得幫助"
+   },
+   {
+    "song_id": "F-31",
+    "title": "主為我預備道路"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 32,
+  "images": [
+   "P32_L1.png",
+   "P32_L2.png",
+   "P32_L3.png",
+   "P32_R1.png",
+   "P32_R2.png",
+   "P32_R3.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "F-32",
+    "title": "你要微笑"
+   },
+   {
+    "song_id": "F-33",
+    "title": "我已找到快樂途徑"
+   },
+   {
+    "song_id": "F-34",
+    "title": "你能體會"
+   },
+   {
+    "song_id": "F-35",
+    "title": "當你求"
+   },
+   {
+    "song_id": "F-36",
+    "title": "靠近十架"
+   },
+   {
+    "song_id": "F-37",
+    "title": "美哉主耶穌"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 33,
+  "images": [
+   "P33_L1.png",
+   "P33_L2.png",
+   "P33_L3.png",
+   "P33_L4.png",
+   "P33_R1.png",
+   "P33_R2.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "F-38",
+    "title": "主內滿足"
+   },
+   {
+    "song_id": "F-39",
+    "title": "那釘痕的手"
+   },
+   {
+    "song_id": "F-40",
+    "title": "離了祂"
+   },
+   {
+    "song_id": "F-41",
+    "title": "為你"
+   },
+   {
+    "song_id": "F-42",
+    "title": "你當以全心愛主你神"
+   },
+   {
+    "song_id": "F-43",
+    "title": "更多有你"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 34,
+  "images": [
+   "P34_L1.png",
+   "P34_L2.png",
+   "P34_L3.png",
+   "P34_R1.png",
+   "P34_R2.png"
+  ],
+  "full_page": "page_P34.png",
+  "candidates": [
+   {
+    "song_id": "F-44",
+    "title": "讚美耶穌的聖名"
+   },
+   {
+    "song_id": "F-45",
+    "title": "我愛你主"
+   },
+   {
+    "song_id": "F-46",
+    "title": "我真愛進入你同在"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 35,
+  "images": [
+   "P35_L1.png",
+   "P35_L2.png",
+   "P35_L3.png",
+   "P35_R1.png",
+   "P35_R2.png",
+   "P35_R3.png",
+   "P35_R4.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "Dm-1",
+    "title": "就是我"
+   },
+   {
+    "song_id": "Dm-2",
+    "title": "平安 Shalom"
+   },
+   {
+    "song_id": "Dm-3",
+    "title": "我們的心中多快樂"
+   },
+   {
+    "song_id": "Dm-4",
+    "title": "建造耶路撒冷"
+   },
+   {
+    "song_id": "Dm-5",
+    "title": "良人和我"
+   },
+   {
+    "song_id": "Dm-6",
+    "title": "當向耶和華歡呼歌唱"
+   },
+   {
+    "song_id": "Dm-7",
+    "title": "向主唱新歌"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 36,
+  "images": [
+   "P36_L1.png",
+   "P36_L2.png",
+   "P36_L3.png",
+   "P36_R1.png",
+   "P36_R2.png"
+  ],
+  "full_page": "page_P36.png",
+  "candidates": [
+   {
+    "song_id": "Dm-8",
+    "title": "向耶和華唱新歌"
+   },
+   {
+    "song_id": "Dm-9",
+    "title": "心願"
+   },
+   {
+    "song_id": "Dm-10",
+    "title": "頌揚讚美神"
+   },
+   {
+    "song_id": "Dm-11",
+    "title": "唱哈利路亞"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 37,
+  "images": [
+   "P37_L1.png",
+   "P37_L2.png",
+   "P37_L3.png",
+   "P37_L4.png",
+   "P37_R1.png",
+   "P37_R2.png",
+   "P37_R3.png"
+  ],
+  "full_page": "page_P37.png",
+  "candidates": [
+   {
+    "song_id": "G-1",
+    "title": "我願你來"
+   },
+   {
+    "song_id": "G-2",
+    "title": "來尋求你面"
+   },
+   {
+    "song_id": "G-3",
+    "title": "獻上感恩"
+   },
+   {
+    "song_id": "G-4",
+    "title": "你已被揀選"
+   },
+   {
+    "song_id": "G-5",
+    "title": "走天路"
+   },
+   {
+    "song_id": "G-6",
+    "title": "我的心哪 要稱頌主"
+   },
+   {
+    "song_id": "G-7",
+    "title": "願你認識主耶穌"
+   },
+   {
+    "song_id": "G-8",
+    "title": "與耶穌同行"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 38,
+  "images": [
+   "P38_L1.png",
+   "P38_L2.png",
+   "P38_L3.png",
+   "P38_L4.png",
+   "P38_L5.png",
+   "P38_L6.png",
+   "P38_L7.png",
+   "P38_R1.png",
+   "P38_R2.png"
+  ],
+  "full_page": "page_P38.png",
+  "candidates": [
+   {
+    "song_id": "G-9",
+    "title": "行在光明中"
+   },
+   {
+    "song_id": "G-10",
+    "title": "頭一次的愛"
+   },
+   {
+    "song_id": "G-11",
+    "title": "真神極愛世人"
+   },
+   {
+    "song_id": "G-12",
+    "title": "清心的人"
+   },
+   {
+    "song_id": "G-13",
+    "title": "再活一次"
+   },
+   {
+    "song_id": "G-14",
+    "title": "主我高舉你的名"
+   },
+   {
+    "song_id": "G-15",
+    "title": "主我愛你"
+   },
+   {
+    "song_id": "G-16",
+    "title": "我等候"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 39,
+  "images": [
+   "P39_L1.png",
+   "P39_L2.png",
+   "P39_L3.png"
+  ],
+  "full_page": "page_P39.png",
+  "candidates": [
+   {
+    "song_id": "G-17",
+    "title": "與神和好"
+   },
+   {
+    "song_id": "G-18",
+    "title": "耶穌全勝利"
+   },
+   {
+    "song_id": "G-19",
+    "title": "神的教會向前進"
+   },
+   {
+    "song_id": "G-20",
+    "title": "我敬拜你全能真神"
+   },
+   {
+    "song_id": "G-21",
+    "title": "神要開道路"
+   },
+   {
+    "song_id": "G-22",
+    "title": "抬頭仰望主"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 40,
+  "images": [
+   "P40_L1.png",
+   "P40_L2.png",
+   "P40_L3.png",
+   "P40_R1.png",
+   "P40_R2.png",
+   "P40_R3.png",
+   "P40_R4.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "G-23",
+    "title": "和散那主的聖尊名"
+   },
+   {
+    "song_id": "G-24",
+    "title": "我們尊崇你"
+   },
+   {
+    "song_id": "G-25",
+    "title": "掌管我"
+   },
+   {
+    "song_id": "G-26",
+    "title": "聖哉!聖哉耶和華"
+   },
+   {
+    "song_id": "G-27",
+    "title": "聖潔歸於那位永世君王"
+   },
+   {
+    "song_id": "G-28",
+    "title": "願神賜福給你"
+   },
+   {
+    "song_id": "G-29",
+    "title": "生命在於你"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 41,
+  "images": [
+   "P41_L1.png"
+  ],
+  "full_page": "page_P41.png",
+  "candidates": [
+   {
+    "song_id": "G-30",
+    "title": "願那靈火復興我"
+   },
+   {
+    "song_id": "G-31",
+    "title": "親愛主牽我手"
+   },
+   {
+    "song_id": "G-32",
+    "title": "因你聖名我們敬拜"
+   },
+   {
+    "song_id": "G-33",
+    "title": "來慶賀"
+   },
+   {
+    "song_id": "G-34",
+    "title": "只盼望與你同在"
+   },
+   {
+    "song_id": "G-35",
+    "title": "主永活我心"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 42,
+  "images": [
+   "P42_L1.png",
+   "P42_L2.png",
+   "P42_L3.png",
+   "P42_R1.png",
+   "P42_R2.png",
+   "P42_R3.png",
+   "P42_R4.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "G-36",
+    "title": "助我進深"
+   },
+   {
+    "song_id": "G-37",
+    "title": "今我已得勝"
+   },
+   {
+    "song_id": "G-38",
+    "title": "主耶穌的寶血"
+   },
+   {
+    "song_id": "G-39",
+    "title": "靠近主"
+   },
+   {
+    "song_id": "G-40",
+    "title": "神的道路"
+   },
+   {
+    "song_id": "G-41",
+    "title": "榮耀歸主名"
+   },
+   {
+    "song_id": "G-42",
+    "title": "高舉你"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 43,
+  "images": [
+   "P43_L1.png",
+   "P43_L2.png",
+   "P43_L3.png",
+   "P43_L4.png",
+   "P43_L5.png",
+   "P43_L6.png"
+  ],
+  "full_page": "page_P43.png",
+  "candidates": [
+   {
+    "song_id": "G-43",
+    "title": "神啊 我心堅定"
+   },
+   {
+    "song_id": "G-44",
+    "title": "哈利路亞 救主"
+   },
+   {
+    "song_id": "G-45",
+    "title": "神真是我力量"
+   },
+   {
+    "song_id": "G-46",
+    "title": "主榮耀已彰顯"
+   },
+   {
+    "song_id": "G-47",
+    "title": "擁戴祂為王"
+   },
+   {
+    "song_id": "G-48",
+    "title": "無人能像你"
+   },
+   {
+    "song_id": "G-49",
+    "title": "揚聲歡呼讚美"
+   },
+   {
+    "song_id": "G-50",
+    "title": "主願我單屬你"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 44,
+  "images": [
+   "P44_L1.png",
+   "P44_L2.png",
+   "P44_L3.png",
+   "P44_L4.png",
+   "P44_R1.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "G-51",
+    "title": "盡心盡力來敬拜"
+   },
+   {
+    "song_id": "G-52",
+    "title": "祂會帶領你"
+   },
+   {
+    "song_id": "G-53",
+    "title": "親愛的救主"
+   },
+   {
+    "song_id": "G-54",
+    "title": "新造的人"
+   },
+   {
+    "song_id": "G-55",
+    "title": "你配得穿戴冠冕"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 45,
+  "images": [
+   "P45_L1.png",
+   "P45_L2.png",
+   "P45_L3.png",
+   "P45_R1.png",
+   "P45_R2.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "G-56",
+    "title": "三一神"
+   },
+   {
+    "song_id": "G-57",
+    "title": "阿爸天父"
+   },
+   {
+    "song_id": "G-58",
+    "title": "極大的復興"
+   },
+   {
+    "song_id": "G-59",
+    "title": "我們要見耶穌被高舉"
+   },
+   {
+    "song_id": "G-60",
+    "title": "主的日子"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 46,
+  "images": [
+   "P46_L1.png",
+   "P46_L2.png",
+   "P46_L3.png",
+   "P46_L4.png",
+   "P46_L5.png",
+   "P46_L6.png",
+   "P46_L7.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "Em-1",
+    "title": "當聖靈在我的心"
+   },
+   {
+    "song_id": "Em-2",
+    "title": "榮耀"
+   },
+   {
+    "song_id": "Em-3",
+    "title": "以色列的聖者"
+   },
+   {
+    "song_id": "Em-4",
+    "title": "獻我身心"
+   },
+   {
+    "song_id": "Em-5",
+    "title": "全能主上帝"
+   },
+   {
+    "song_id": "Em-6",
+    "title": "生命之歌"
+   },
+   {
+    "song_id": "Em-7",
+    "title": "撒網的人"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 47,
+  "images": [
+   "P47_L1.png"
+  ],
+  "full_page": "page_P47.png",
+  "candidates": [
+   {
+    "song_id": "Em-8",
+    "title": "奉主名來的君王"
+   },
+   {
+    "song_id": "Em-9",
+    "title": "我相信"
+   },
+   {
+    "song_id": "Em-10",
+    "title": "弟兄和睦"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 48,
+  "images": [
+   "P48_L1.png",
+   "P48_L2.png",
+   "P48_L3.png",
+   "P48_L4.png",
+   "P48_L5.png",
+   "P48_R1.png",
+   "P48_R2.png",
+   "P48_R3.png"
+  ],
+  "full_page": "page_P48.png",
+  "candidates": [
+   {
+    "song_id": "A-1",
+    "title": "哦主 我神"
+   },
+   {
+    "song_id": "A-2",
+    "title": "你配得至聖尊榮"
+   },
+   {
+    "song_id": "A-3",
+    "title": "神羔羊"
+   },
+   {
+    "song_id": "A-4",
+    "title": "來高聲唱"
+   },
+   {
+    "song_id": "A-5",
+    "title": "諸天宣揚"
+   },
+   {
+    "song_id": "A-6",
+    "title": "是耶穌"
+   },
+   {
+    "song_id": "A-7",
+    "title": "祂是獨一真神"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 49,
+  "images": [
+   "P49_L1.png",
+   "P49_R1.png",
+   "P49_R2.png",
+   "P49_R3.png"
+  ],
+  "full_page": "page_P49.png",
+  "candidates": [
+   {
+    "song_id": "A-8",
+    "title": "主你本為大"
+   },
+   {
+    "song_id": "A-9",
+    "title": "我站立敬畏你"
+   },
+   {
+    "song_id": "A-10",
+    "title": "興起歡唱"
+   },
+   {
+    "song_id": "A-11",
+    "title": "平安王"
+   },
+   {
+    "song_id": "A-12",
+    "title": "歌頌你聖名"
+   },
+   {
+    "song_id": "A-13",
+    "title": "耶穌 現代人的希望"
+   },
+   {
+    "song_id": "A-14",
+    "title": "皆脫落"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 50,
+  "images": [
+   "P50_L1.png",
+   "P50_L2.png",
+   "P50_L3.png",
+   "P50_L4.png",
+   "P50_L5.png",
+   "P50_L6.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "A-15",
+    "title": "讓我靈自由"
+   },
+   {
+    "song_id": "A-16",
+    "title": "惟有你是主"
+   },
+   {
+    "song_id": "A-17",
+    "title": "願你崇高"
+   },
+   {
+    "song_id": "A-18",
+    "title": "求煉淨我心"
+   },
+   {
+    "song_id": "A-19",
+    "title": "越事奉越甘甜"
+   },
+   {
+    "song_id": "A-20",
+    "title": "祂是唯一幫助者"
+   }
+  ],
+  "clean_cut": true
+ },
+ {
+  "book_page": 51,
+  "images": [
+   "P51_L1.png"
+  ],
+  "full_page": "page_P51.png",
+  "candidates": [
+   {
+    "song_id": "A-21",
+    "title": "醫治這地"
+   },
+   {
+    "song_id": "A-22",
+    "title": "我以禱告來到你跟前"
+   },
+   {
+    "song_id": "A-23",
+    "title": "你求告我"
+   },
+   {
+    "song_id": "A-24",
+    "title": "因祂活著"
+   },
+   {
+    "song_id": "A-25",
+    "title": "敬拜主"
+   },
+   {
+    "song_id": "A-26",
+    "title": "聖靈歡迎你降臨"
+   },
+   {
+    "song_id": "A-27",
+    "title": "無論何處去"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 52,
+  "images": [
+   "P52_L1.png",
+   "P52_L2.png",
+   "P52_L3.png",
+   "P52_L4.png",
+   "P52_L5.png",
+   "P52_L6.png",
+   "P52_R1.png",
+   "P52_R2.png"
+  ],
+  "full_page": "page_P52.png",
+  "candidates": [
+   {
+    "song_id": "A-28",
+    "title": "耶穌 耶穌"
+   },
+   {
+    "song_id": "A-29",
+    "title": "賜給我純潔的友誼"
+   },
+   {
+    "song_id": "A-30",
+    "title": "進入至聖所在"
+   },
+   {
+    "song_id": "A-31",
+    "title": "主啊我深愛"
+   },
+   {
+    "song_id": "A-32",
+    "title": "速開心門"
+   },
+   {
+    "song_id": "A-33",
+    "title": "愛主更深"
+   }
+  ],
+  "clean_cut": false
+ },
+ {
+  "book_page": 53,
+  "images": [
+   "P53_L1.png",
+   "P53_L2.png",
+   "P53_L3.png"
+  ],
+  "full_page": null,
+  "candidates": [
+   {
+    "song_id": "A-34",
+    "title": "祂是我主我神"
+   },
+   {
+    "song_id": "A-35",
+    "title": "神掌權"
+   },
+   {
+    "song_id": "A-36",
+    "title": "尊榮歸主我神"
+   }
+  ],
+  "clean_cut": true
+ }
+]
