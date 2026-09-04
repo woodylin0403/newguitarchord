@@ -92,3 +92,46 @@ export async function revertSongContent(slug: string): Promise<EditResult> {
   revalidateSong(slug);
   return { ok: true };
 }
+
+/**
+ * Pin this song to one crop image from its page (or `null` to unpin and go
+ * back to the whole-page scan). Admin only.
+ */
+export async function setSongScan(
+  slug: string,
+  crop: string | null,
+): Promise<EditResult> {
+  if (!SLUG_RE.test(slug)) return { ok: false, error: "無效的歌曲代號。" };
+  if (crop !== null && !/^[A-Za-z0-9_]+\.png$/.test(crop)) {
+    return { ok: false, error: "無效的圖檔名。" };
+  }
+
+  const { user, error } = await requireAdmin();
+  if (error) return { ok: false, error };
+
+  let supabase;
+  try {
+    supabase = getAdminSupabase();
+  } catch {
+    return { ok: false, error: "伺服器未設定 Supabase。" };
+  }
+
+  const dbError =
+    crop === null
+      ? (await supabase.from("song_scans").delete().eq("slug", slug)).error
+      : (
+          await supabase.from("song_scans").upsert(
+            {
+              slug,
+              crop,
+              updated_at: new Date().toISOString(),
+              updated_by: user!.id,
+            },
+            { onConflict: "slug" },
+          )
+        ).error;
+  if (dbError) return { ok: false, error: `設定失敗：${dbError.message}` };
+
+  revalidateSong(slug);
+  return { ok: true };
+}

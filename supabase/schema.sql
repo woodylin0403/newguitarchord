@@ -43,6 +43,25 @@ create policy "songs public read"
 -- 新增 / 刪除一律走 server action + service_role。
 
 -- ─────────────────────────────────────────────────────────────
+-- song_scans：把一首歌釘到「該頁其中一張裁切圖」，取代整頁掃描顯示。
+-- 從編輯器的縮圖選擇設定；優先於 data/scan-map.json。
+-- ─────────────────────────────────────────────────────────────
+create table if not exists public.song_scans (
+  slug        text primary key,
+  crop        text not null,
+  updated_at  timestamptz not null default now(),
+  updated_by  uuid
+);
+
+alter table public.song_scans enable row level security;
+
+drop policy if exists "song_scans public read" on public.song_scans;
+create policy "song_scans public read"
+  on public.song_scans for select
+  using (true);
+-- 寫入走 server action + service_role。
+
+-- ─────────────────────────────────────────────────────────────
 -- profiles：auth.users 的鏡像 + 顯示名稱，註冊時自動建立。
 -- ─────────────────────────────────────────────────────────────
 create table if not exists public.profiles (
