@@ -22,6 +22,27 @@ create policy "song_contents public read"
 -- 寫入一律走 server action + service_role（繞過 RLS），不開放 client 直接寫。
 
 -- ─────────────────────────────────────────────────────────────
+-- songs：站上新增的歌曲（songs.json 之外的）。目錄層會把兩者合併。
+-- ─────────────────────────────────────────────────────────────
+create table if not exists public.songs (
+  slug            text primary key,
+  title           text not null check (char_length(btrim(title)) between 1 and 120),
+  music_key       text not null,
+  number          int  not null,
+  time_signature  text,
+  created_at      timestamptz not null default now(),
+  created_by      uuid
+);
+
+alter table public.songs enable row level security;
+
+drop policy if exists "songs public read" on public.songs;
+create policy "songs public read"
+  on public.songs for select
+  using (true);
+-- 新增 / 刪除一律走 server action + service_role。
+
+-- ─────────────────────────────────────────────────────────────
 -- profiles：auth.users 的鏡像 + 顯示名稱，註冊時自動建立。
 -- ─────────────────────────────────────────────────────────────
 create table if not exists public.profiles (

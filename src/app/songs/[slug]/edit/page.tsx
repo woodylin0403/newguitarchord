@@ -65,6 +65,7 @@ export default async function EditSongPage({
         songKey={song.key}
         initialSource={source ?? TEMPLATE(song.title, song.key)}
         isOverridden={overridden}
+        isCustom={song.source === "custom"}
       />
     </div>
   );

@@ -28,7 +28,15 @@ export function parseCatalogEntry(
   if (!title) return null;
   if (!Number.isInteger(bookPage) || bookPage < 1) return null;
 
-  return { slug: songSlug(key, number), key, number, title, bookPage, timeSignature };
+  return {
+    slug: songSlug(key, number),
+    key,
+    number,
+    title,
+    bookPage,
+    timeSignature,
+    source: "hymnal",
+  };
 }
 
 /**

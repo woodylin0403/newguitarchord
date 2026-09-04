@@ -21,6 +21,7 @@ describe("parseCatalogEntry", () => {
       title: "讚美救主耶穌",
       bookPage: 1,
       timeSignature: "3/4",
+      source: "hymnal",
     });
   });
 

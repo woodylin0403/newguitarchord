@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { AdminNewSongLink } from "@/components/AdminNewSongLink";
 import { SearchBox } from "@/components/SearchBox";
 import { parseKey } from "@/lib/music";
 import { CATALOG_KEYS, getCatalogByKey } from "@/lib/songs/catalog";
@@ -18,9 +19,9 @@ export default async function HomePage() {
       <section className="space-y-5">
         <div className="space-y-2">
           <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
-            教會詩歌
+            烏鴉的天空
             <br />
-            吉他譜
+            詩歌吉他譜
           </h1>
           <p className="text-muted">
             紙本詩歌本數位化。移調、Capo 建議、依原調瀏覽，手機隨開隨彈。
@@ -28,6 +29,10 @@ export default async function HomePage() {
         </div>
 
         <SearchBox />
+
+        <div className="flex items-center gap-2">
+          <AdminNewSongLink />
+        </div>
 
         <p className="text-xs text-muted">
           已轉錄和弦譜{" "}

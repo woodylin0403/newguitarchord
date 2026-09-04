@@ -62,7 +62,7 @@ export default async function SongPage({ params }: PageProps<"/songs/[slug]">) {
     keyLabel(originalKey),
     originalKey !== song.key ? `歸類 ${keyLabel(song.key)}` : null,
     song.timeSignature ? `${song.timeSignature} 拍` : null,
-    `第 ${song.bookPage} 頁`,
+    song.bookPage ? `第 ${song.bookPage} 頁` : null,
   ].filter(Boolean) as string[];
 
   return (

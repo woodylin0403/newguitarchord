@@ -14,6 +14,7 @@ import {
   revertSongContent,
   saveSongContent,
 } from "@/app/songs/[slug]/edit/actions";
+import { deleteSong } from "@/app/songs/new/actions";
 import { ChartPreview } from "./ChartPreview";
 import { ChordPad } from "./ChordPad";
 
@@ -27,11 +28,13 @@ export function SongEditor({
   songKey,
   initialSource,
   isOverridden,
+  isCustom = false,
 }: {
   slug: string;
   songKey: string;
   initialSource: string;
   isOverridden: boolean;
+  isCustom?: boolean;
 }) {
   const router = useRouter();
   const [source, setSource] = useState(initialSource);
@@ -88,6 +91,20 @@ export function SongEditor({
         router.refresh();
       } else {
         setMsg(res.error ?? "還原失敗");
+      }
+    });
+  };
+
+  const remove = () => {
+    if (!confirm("確定要整首刪除？這是站上新增的歌，會一併刪掉和弦譜。")) return;
+    setMsg(null);
+    startTransition(async () => {
+      const res = await deleteSong(slug);
+      if (res.ok) {
+        router.push("/");
+        router.refresh();
+      } else {
+        setMsg(res.error ?? "刪除失敗");
       }
     });
   };
@@ -157,15 +174,26 @@ export function SongEditor({
         >
           復原變更
         </button>
-        {isOverridden && (
+        {isCustom ? (
           <button
             type="button"
-            onClick={revert}
+            onClick={remove}
             disabled={pending}
             className="ml-auto rounded-full border border-border px-4 py-2 text-sm text-muted disabled:opacity-40"
           >
-            刪除站上修改（回原始檔）
+            刪除整首
           </button>
+        ) : (
+          isOverridden && (
+            <button
+              type="button"
+              onClick={revert}
+              disabled={pending}
+              className="ml-auto rounded-full border border-border px-4 py-2 text-sm text-muted disabled:opacity-40"
+            >
+              刪除站上修改（回原始檔）
+            </button>
+          )
         )}
       </div>
     </div>

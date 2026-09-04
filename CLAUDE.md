@@ -181,7 +181,21 @@
   - `src/components/SongComments.tsx`（client）：歌曲頁最底部，fetch `/api/me` + 留言列表；登入才顯示輸入框；本人或管理員看得到「刪除」。歌曲頁維持 SSG。
   - 匿名狀態實測 OK（顯示「登入後即可留言」、空列表）。登入 → 留言 → 刪除的完整流程待使用者測。
 
-**Supabase 四項功能全部程式完成。** 待使用者實測：管理員編輯存檔、留言/刪除。之後可繼續轉錄（D-22 起）。
+**Supabase 四項功能全部程式完成。**
+
+- **⑤ 站上新增歌曲（完成，待跑 SQL）**：
+  - `supabase/schema.sql` 加了 `public.songs` 表（slug / title / music_key / number / time_signature），**使用者要重跑一次 SQL**。
+  - `src/lib/songs/catalog.ts`：`loadCatalog` 合併 `songs.json` + `songs` 表（`loadCustomSongs`，`getPublicSupabase`）；`SongSummary` 加 `source: "hymnal" | "custom"`、`bookPage` 可為 null；`nextSlugForKey()` 算下一個空 slug（例 `c-62`）。
+  - `/songs/new`（管理員限定）+ `src/components/NewSongForm.tsx`：填歌名/原調/拍號 + ChordPro 編輯區（沿用 `ChordPad` + `ChartPreview`）。
+  - `src/app/songs/new/actions.ts`：`createSong`（寫 `songs` + `song_contents`，失敗回滾）、`deleteSong`（只能刪 custom）。
+  - 首頁 `AdminNewSongLink`（fetch `/api/me`，只有管理員看得到）；編輯頁對 custom 歌顯示「刪除整首」。
+  - 歌曲頁未 build 過的新 slug 靠 `dynamicParams` on-demand 算（頁面有 `revalidate = 300`）。
+
+- **站名**：`烏鴉的天空 詩歌吉他譜`（`SITE_NAME`）；header 短版 `烏鴉的天空`（`SITE_SHORT`）。
+
+- **SEO**：`src/app/sitemap.ts`（首頁 + 9 原調 + 全部歌，含 custom）、`src/app/robots.ts`、`src/lib/site.ts` 的 `SITE_URL`（`NEXT_PUBLIC_SITE_URL`，未設回 localhost）。
+
+- 部署：Vercel，`.claude/launch.json` `autoPort:false`（OAuth 綁 :3000）。
 
 ## 目前進度
 

@@ -14,10 +14,12 @@ export interface SongSummary {
   number: number;
   /** Chinese song title */
   title: string;
-  /** page number in the physical hymnal */
-  bookPage: number;
+  /** page number in the physical hymnal; null for songs added on the site */
+  bookPage: number | null;
   /** time signature such as `3/4`, `6/8`; null when the index omits it */
   timeSignature: string | null;
+  /** where the entry comes from: the printed hymnal, or added on the site */
+  source: "hymnal" | "custom";
 }
 
 /** Shape of `data/songs.json`: key group -> array of `"n|title|page|time?"`. */

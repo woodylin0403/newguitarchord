@@ -26,17 +26,18 @@ const spaceMono = Space_Mono({
   display: "swap",
 });
 
-const SITE_NAME = "詩歌吉他譜";
+const SITE_NAME = "烏鴉的天空 詩歌吉他譜";
+const SITE_SHORT = "烏鴉的天空";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "教會詩歌吉他譜",
-    template: "%s｜教會詩歌吉他譜",
+    default: SITE_NAME,
+    template: `%s｜${SITE_NAME}`,
   },
   description:
-    "教會紙本詩歌本的數位吉他譜：ChordPro 和弦、即時移調、Capo 建議，依原調分類、可搜尋，手機優先。",
-  applicationName: "教會詩歌吉他譜",
+    "數位詩歌吉他譜：ChordPro 和弦、即時移調、Capo 建議，依原調分類、可搜尋，手機優先。",
+  applicationName: SITE_NAME,
   formatDetection: { telephone: false },
 };
 
@@ -64,7 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 ♪
               </span>
               <span className="font-display text-[17px] tracking-tight">
-                {SITE_NAME}
+                {SITE_SHORT}
               </span>
             </Link>
             <div className="flex items-center gap-1">
