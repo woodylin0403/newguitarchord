@@ -42,8 +42,16 @@ export async function DELETE(
     return NextResponse.json({ error: "沒有權限。" }, { status: 403 });
   }
 
-  // Owner can update via RLS; admin deleting someone else's needs service role.
-  const writer = isOwner ? supabase : getAdminSupabase();
+  // Authorisation is enforced above (owner or admin); do the write with the
+  // service-role client so it doesn't depend on RLS resolving auth.uid() in the
+  // route-handler request context. Fall back to the session client if the
+  // service key isn't configured.
+  let writer;
+  try {
+    writer = getAdminSupabase();
+  } catch {
+    writer = supabase;
+  }
   const { error } = await writer
     .from("comments")
     .update({ deleted_at: new Date().toISOString() })
