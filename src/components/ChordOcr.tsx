@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 
 import { convertChartImage } from "@/app/tools/ocr/actions";
 import { Button } from "@/components/ui/button";
@@ -22,9 +22,12 @@ const MAX_BYTES = 5 * 1024 * 1024;
 export function ChordOcr({
   onApply,
   applyLabel = "填入編輯器",
+  defaultImageUrl = null,
 }: {
   onApply?: (chordpro: string) => void;
   applyLabel?: string;
+  /** same-origin image URL to pre-load (e.g. this song's pinned scan crop) */
+  defaultImageUrl?: string | null;
 }) {
   const router = useRouter();
   const [dataUrl, setDataUrl] = useState<string | null>(null);
@@ -34,6 +37,23 @@ export function ChordOcr({
   const [dragging, setDragging] = useState(false);
   const [pending, startTransition] = useTransition();
   const fileRef = useRef<HTMLInputElement>(null);
+  const loadedDefault = useRef(false);
+
+  // Pre-load the song's pinned scan crop so the user just clicks 轉換.
+  useEffect(() => {
+    if (!defaultImageUrl || loadedDefault.current) return;
+    loadedDefault.current = true;
+    fetch(defaultImageUrl)
+      .then((r) => (r.ok ? r.blob() : Promise.reject(new Error("fetch"))))
+      .then((blob) => {
+        const reader = new FileReader();
+        reader.onload = () => setDataUrl(String(reader.result));
+        reader.readAsDataURL(blob);
+      })
+      .catch(() => {
+        /* leave empty — the user can still paste an image */
+      });
+  }, [defaultImageUrl]);
 
   const loadFile = (f: File | null | undefined) => {
     if (!f) return;

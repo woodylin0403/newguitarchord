@@ -51,6 +51,8 @@ export function SongEditor({
   const [rightTab, setRightTab] = useState<"preview" | "scan">(
     scanUrl ? "scan" : "preview",
   );
+  // Open the 從和弦圖轉入 panel by default when this song has a pinned crop.
+  const [ocrOpen, setOcrOpen] = useState(Boolean(scanUrl));
   const [pending, startTransition] = useTransition();
 
   const taRef = useRef<HTMLTextAreaElement>(null);
@@ -136,13 +138,18 @@ export function SongEditor({
         onInsert={insertAtCursor}
       />
 
-      <details className="rounded-xl border border-border bg-surface">
+      <details
+        className="rounded-xl border border-border bg-surface"
+        open={ocrOpen}
+        onToggle={(e) => setOcrOpen((e.target as HTMLDetailsElement).open)}
+      >
         <summary className="cursor-pointer list-none px-3 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted">
-          從和弦圖轉入
+          從和弦圖轉入{scanUrl ? "（已帶入這首的掃描圖）" : ""}
         </summary>
         <div className="border-t border-border p-3">
           <ChordOcr
             applyLabel="取代編輯內容"
+            defaultImageUrl={scanUrl}
             onApply={(t) => {
               if (
                 source.trim() &&
