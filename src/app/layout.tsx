@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { AuthNav } from "@/components/AuthNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { Button } from "@/components/ui/button";
 import { SITE_URL } from "@/lib/site";
 
 const figtree = Figtree({
@@ -69,24 +70,27 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               </span>
             </Link>
             <div className="flex items-center gap-1">
-              <Link
-                href="/search"
-                aria-label="搜尋"
-                className="grid h-9 w-9 place-items-center rounded-lg text-muted hover:bg-surface-2 hover:text-foreground"
+              <Button
+                asChild
+                variant="ghost"
+                size="icon"
+                className="text-muted"
               >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                >
-                  <circle cx="11" cy="11" r="7" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-              </Link>
+                <Link href="/search" aria-label="搜尋">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  >
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m21 21-4.3-4.3" />
+                  </svg>
+                </Link>
+              </Button>
               <ThemeToggle />
               <AuthNav />
             </div>

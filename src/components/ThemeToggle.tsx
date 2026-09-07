@@ -2,6 +2,9 @@
 
 import { useSyncExternalStore } from "react";
 
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
 type Theme = "system" | "light" | "dark";
 const KEY = "hymnbook.theme";
 const EVENT = "hymnbook:theme";
@@ -63,7 +66,10 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={() => apply(NEXT[theme])}
-      className="grid h-9 w-9 place-items-center rounded-lg text-muted hover:bg-surface-2 hover:text-foreground"
+      className={cn(
+        buttonVariants({ variant: "ghost", size: "icon" }),
+        "text-muted",
+      )}
       aria-label={`主題：${LABEL[theme]}（點擊切換）`}
       title={`主題：${LABEL[theme]}`}
     >

@@ -1,9 +1,19 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { User } from "@supabase/supabase-js";
+import { LogOutIcon } from "lucide-react";
 
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { getBrowserSupabase } from "@/lib/supabase/browser";
 
 function displayName(user: User): string {
@@ -24,8 +34,6 @@ export function AuthNav() {
   const [user, setUser] = useState<User | null>(null);
   // When Supabase isn't configured there is nothing to load, so start ready.
   const [ready, setReady] = useState(() => !getBrowserSupabase());
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!supabase) return;
@@ -39,23 +47,16 @@ export function AuthNav() {
     return () => sub.subscription.unsubscribe();
   }, [supabase]);
 
-  useEffect(() => {
-    if (!open) return;
-    const onClick = (e: MouseEvent) => {
-      if (!menuRef.current?.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", onClick);
-    return () => document.removeEventListener("mousedown", onClick);
-  }, [open]);
-
   if (!supabase || !ready) {
     return <span className="w-16" aria-hidden />;
   }
 
   if (!user) {
     return (
-      <button
+      <Button
         type="button"
+        variant="outline"
+        size="sm"
         onClick={() =>
           supabase.auth.signInWithOAuth({
             provider: "google",
@@ -66,10 +67,9 @@ export function AuthNav() {
             },
           })
         }
-        className="rounded-lg border border-border px-2.5 py-1 text-sm hover:bg-surface-2"
       >
         登入
-      </button>
+      </Button>
     );
   }
 
@@ -78,40 +78,37 @@ export function AuthNav() {
     user.user_metadata?.picture) as string | undefined;
 
   return (
-    <div className="relative" ref={menuRef}>
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-1.5 rounded-lg border border-border py-0.5 pl-0.5 pr-2 text-sm hover:bg-surface-2"
-      >
-        {avatar ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={avatar} alt="" className="h-6 w-6 rounded-md" />
-        ) : (
-          <span className="grid h-6 w-6 place-items-center rounded-md bg-accent-soft text-xs font-semibold text-accent">
-            {name.slice(0, 1).toUpperCase()}
-          </span>
-        )}
-        <span className="max-w-[7rem] truncate">{name}</span>
-      </button>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button
+          type="button"
+          className="flex items-center gap-1.5 rounded-full border border-border py-0.5 pl-0.5 pr-2 text-sm outline-none transition-colors hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring/40"
+        >
+          {avatar ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={avatar} alt="" className="size-6 rounded-full" />
+          ) : (
+            <span className="grid size-6 place-items-center rounded-full bg-accent-soft text-xs font-semibold text-accent">
+              {name.slice(0, 1).toUpperCase()}
+            </span>
+          )}
+          <span className="max-w-[7rem] truncate">{name}</span>
+        </button>
+      </DropdownMenuTrigger>
 
-      {open && (
-        <div className="absolute right-0 z-30 mt-1 w-44 overflow-hidden rounded-xl border border-border bg-surface py-1 text-sm shadow-lg">
-          <div className="truncate px-3 py-1.5 text-xs text-muted">
-            {user.email}
-          </div>
-          <button
-            type="button"
-            onClick={async () => {
-              await supabase.auth.signOut();
-              window.location.reload();
-            }}
-            className="block w-full px-3 py-1.5 text-left hover:bg-surface-2"
-          >
-            登出
-          </button>
-        </div>
-      )}
-    </div>
+      <DropdownMenuContent className="w-48">
+        <DropdownMenuLabel className="truncate">{user.email}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onSelect={async () => {
+            await supabase.auth.signOut();
+            window.location.reload();
+          }}
+        >
+          <LogOutIcon />
+          登出
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
