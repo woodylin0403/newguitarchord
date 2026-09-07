@@ -78,8 +78,8 @@ export function NewSongForm() {
         chordpro: source,
       });
       if (res.ok && res.slug) {
-        router.push(`/songs/${res.slug}`);
         router.refresh();
+        router.push(`/songs/${res.slug}`);
       } else {
         setMsg(res.error ?? "新增失敗");
       }

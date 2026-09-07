@@ -81,13 +81,19 @@ export function SongEditor({
     ta?.focus();
   };
 
+  // Clear the client router cache first, THEN navigate — otherwise the push
+  // can render the copy of the target page cached from before this edit.
+  const goFresh = (path: string) => {
+    router.refresh();
+    router.push(path);
+  };
+
   const save = () => {
     setMsg(null);
     startTransition(async () => {
       const res = await saveSongContent(slug, source);
       if (res.ok) {
-        router.push(`/songs/${slug}`);
-        router.refresh();
+        goFresh(`/songs/${slug}`);
       } else {
         setMsg(res.error ?? "儲存失敗");
       }
@@ -100,8 +106,7 @@ export function SongEditor({
     startTransition(async () => {
       const res = await revertSongContent(slug);
       if (res.ok) {
-        router.push(`/songs/${slug}`);
-        router.refresh();
+        goFresh(`/songs/${slug}`);
       } else {
         setMsg(res.error ?? "還原失敗");
       }
@@ -114,8 +119,7 @@ export function SongEditor({
     startTransition(async () => {
       const res = await deleteSong(slug);
       if (res.ok) {
-        router.push("/");
-        router.refresh();
+        goFresh("/");
       } else {
         setMsg(res.error ?? "刪除失敗");
       }
