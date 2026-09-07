@@ -11,7 +11,21 @@ import { cn } from "@/lib/utils";
 
 const MAX_BYTES = 5 * 1024 * 1024;
 
-export function ChordOcr() {
+/**
+ * Chord-chart image → ChordPro converter.
+ *
+ * Standalone (no `onApply`): shows 複製 + 帶進新增歌曲 (hands the text to
+ * `/songs/new` via sessionStorage).
+ * Embedded (`onApply` given): shows 複製 + a button that calls `onApply(text)`
+ * so a host editor can drop the result straight into its textarea.
+ */
+export function ChordOcr({
+  onApply,
+  applyLabel = "填入編輯器",
+}: {
+  onApply?: (chordpro: string) => void;
+  applyLabel?: string;
+}) {
   const router = useRouter();
   const [dataUrl, setDataUrl] = useState<string | null>(null);
   const [out, setOut] = useState("");
@@ -163,9 +177,15 @@ export function ChordOcr() {
             <Button variant="outline" onClick={copy}>
               複製
             </Button>
-            <Button variant="outline" onClick={toNewSong}>
-              帶進新增歌曲
-            </Button>
+            {onApply ? (
+              <Button variant="outline" onClick={() => onApply(out)}>
+                {applyLabel}
+              </Button>
+            ) : (
+              <Button variant="outline" onClick={toNewSong}>
+                帶進新增歌曲
+              </Button>
+            )}
           </>
         )}
       </div>

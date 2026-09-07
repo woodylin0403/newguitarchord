@@ -21,12 +21,18 @@ const ALLOWED = new Set([
 
 const PROMPT = [
   "你是吉他和弦譜轉錄助手。附圖是一張「和弦圖」：和弦符號寫在歌詞上方，",
-  "每個和弦符號的第一個字元，對齊它應該落下的那個歌詞音節。",
+  "每個和弦符號的第一個字元，垂直對齊它應該落下的那個歌詞字。",
   "",
-  "請把圖轉成 ChordPro 純文字格式，規則：",
-  "• 和弦寫成 [C]，插在它對齊的那個字「正前方」。",
-  "• 和弦剛好落在兩字之間的空白時，寫成 [C] 之後接一個半形空白，再接下一個字。",
-  "• 逐行輸出歌詞，保留原本的分行與空格。",
+  "做法：對每一行，逐一看每個和弦符號在圖上的水平位置（它的左緣 x 座標），",
+  "找出正下方那一行歌詞裡「哪一個字」的位置最接近，[和弦] 就插在那個字的正前方。",
+  "",
+  "特別注意第一個和弦：它常常不在該行第一個字的上方（左邊有一段縮排空白），",
+  "這時要把它插在它真正對齊的字前面，例如變成「哦[A]主」，",
+  "不要因為它是該行第一個和弦就放到行首。逐一比對每個和弦，不要整排往左推。",
+  "",
+  "其他規則：",
+  "• 和弦寫成 [C]。和弦落在兩字之間的空白處時，寫成 [C] 再接一個半形空白，再接下一個字。",
+  "• 逐行輸出歌詞，保留原本的分行。",
   "• 和弦原樣保留，圖上寫什麼就輸出什麼（含 m7、maj7、sus、add、6、9、轉位 /G 等），不要簡化。",
   "• 圖最上方若有調號與拍號（例如「A 4/4」），第一行輸出 {key: A}，第二行 {time: 4/4}。",
   "• 有標題就輸出 {title: 標題}。",
@@ -34,8 +40,8 @@ const PROMPT = [
   "",
   "只輸出 ChordPro 文字本身，不要任何說明、前後綴或 ``` 圍欄。",
   "",
-  "範例（示意）：一行歌詞「哦主 我神」上方 A 對齊「哦」、C#m7 對齊「我」，",
-  "輸出為： [A]哦主 [C#m7]我神",
+  "範例：某行歌詞「哦主 我神 你的聖名」，圖上 A 對齊「主」、C#m7 對齊「神」、D 對齊「你」，",
+  "輸出為： 哦[A]主 我[C#m7]神 [D]你的聖名",
 ].join("\n");
 
 /**
@@ -69,8 +75,11 @@ export async function convertChartImage(dataUrl: string): Promise<OcrResult> {
   try {
     const res = await client.messages.create({
       model: MODEL,
-      max_tokens: 4096,
-      thinking: { type: "disabled" },
+      max_tokens: 8192,
+      // A little reasoning materially improves chord-to-syllable alignment
+      // (especially the first chord of a line); low effort keeps cost bounded.
+      thinking: { type: "adaptive" },
+      output_config: { effort: "low" },
       messages: [
         {
           role: "user",

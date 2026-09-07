@@ -20,6 +20,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { ChartPreview } from "./ChartPreview";
+import { ChordOcr } from "./ChordOcr";
 import { ChordPad } from "./ChordPad";
 
 /**
@@ -128,6 +129,27 @@ export function SongEditor({
         usedChords={usedChords}
         onInsert={insertAtCursor}
       />
+
+      <details className="rounded-xl border border-border bg-surface">
+        <summary className="cursor-pointer list-none px-3 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted">
+          從和弦圖轉入
+        </summary>
+        <div className="border-t border-border p-3">
+          <ChordOcr
+            applyLabel="取代編輯內容"
+            onApply={(t) => {
+              if (
+                source.trim() &&
+                source !== initialSource &&
+                !confirm("用轉出的內容取代目前編輯內容？")
+              )
+                return;
+              setSource(t);
+              setMsg("已帶入辨識結果，請對照原圖校對後再儲存。");
+            }}
+          />
+        </div>
+      </details>
 
       <div className="grid gap-3 md:grid-cols-2">
         <Textarea

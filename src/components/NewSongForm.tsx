@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { CATALOG_KEYS, collectChords, parseChordPro } from "@/lib/music";
 import { createSong } from "@/app/songs/new/actions";
 import { OCR_DRAFT_KEY } from "@/lib/ocr/draft";
+import { ChordOcr } from "@/components/ChordOcr";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -136,6 +137,26 @@ export function NewSongForm() {
       </p>
 
       <ChordPad songKey={key} usedChords={usedChords} onInsert={insertAtCursor} />
+
+      <details className="rounded-xl border border-border bg-surface">
+        <summary className="cursor-pointer list-none px-3 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted">
+          從和弦圖轉入
+        </summary>
+        <div className="border-t border-border p-3">
+          <ChordOcr
+            applyLabel="填入下方編輯區"
+            onApply={(t) => {
+              if (
+                edited &&
+                edited.trim() &&
+                !confirm("用轉出的內容取代目前編輯內容？")
+              )
+                return;
+              setEdited(t);
+            }}
+          />
+        </div>
+      </details>
 
       <div className="grid gap-3 md:grid-cols-2">
         <Textarea
