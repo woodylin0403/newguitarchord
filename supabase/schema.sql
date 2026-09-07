@@ -62,6 +62,24 @@ create policy "song_scans public read"
 -- 寫入走 server action + service_role。
 
 -- ─────────────────────────────────────────────────────────────
+-- song_media：每首歌的參考影片（YouTube）。編輯者貼連結，歌曲頁顯示播放器。
+-- ─────────────────────────────────────────────────────────────
+create table if not exists public.song_media (
+  slug        text primary key,
+  youtube_id  text not null,
+  updated_at  timestamptz not null default now(),
+  updated_by  uuid
+);
+
+alter table public.song_media enable row level security;
+
+drop policy if exists "song_media public read" on public.song_media;
+create policy "song_media public read"
+  on public.song_media for select
+  using (true);
+-- 寫入走 server action + service_role。
+
+-- ─────────────────────────────────────────────────────────────
 -- profiles：auth.users 的鏡像 + 顯示名稱，註冊時自動建立。
 -- ─────────────────────────────────────────────────────────────
 create table if not exists public.profiles (

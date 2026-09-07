@@ -6,11 +6,13 @@ import { AdminEditLink } from "@/components/AdminEditLink";
 import { ChordProView } from "@/components/ChordProView";
 import { JsonLd } from "@/components/JsonLd";
 import { SongComments } from "@/components/SongComments";
+import { YouTubeLite } from "@/components/YouTubeLite";
 import { Badge } from "@/components/ui/badge";
 import { parseKey, suggestCapo } from "@/lib/music";
 import { getAllSlugs, getSong } from "@/lib/songs/catalog";
 import { getSongDocument } from "@/lib/songs/content";
 import { keyLabel } from "@/lib/songs/labels";
+import { getSongMedia } from "@/lib/songs/media";
 import { getSongScans } from "@/lib/songs/scans";
 import { SITE_NAME, SITE_URL, siteUrl } from "@/lib/site";
 
@@ -50,9 +52,10 @@ export default async function SongPage({ params }: PageProps<"/songs/[slug]">) {
   const song = await getSong(slug);
   if (!song) notFound();
 
-  const [document, scans] = await Promise.all([
+  const [document, scans, media] = await Promise.all([
     getSongDocument(slug),
     getSongScans(slug),
+    getSongMedia(slug),
   ]);
 
   // A ChordPro file may declare its own {key:}; that is the real playing key.
@@ -141,6 +144,17 @@ export default async function SongPage({ params }: PageProps<"/songs/[slug]">) {
         <ChordProView document={document} originalKey={originalKey} />
       ) : (
         <PendingTranscription musicKey={originalKey} />
+      )}
+
+      {media && (
+        <section className="space-y-2">
+          <h2 className="text-xs font-semibold uppercase tracking-[0.15em] text-muted">
+            參考影片
+          </h2>
+          <div className="max-w-md">
+            <YouTubeLite id={media.youtubeId} title={song.title} />
+          </div>
+        </section>
       )}
 
       {scans &&

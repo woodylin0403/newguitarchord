@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { parseChordPro } from "@/lib/music";
+import { parseYouTubeId } from "@/lib/youtube";
 import { getAdminSupabase } from "@/lib/supabase/admin";
 import { getCurrentUser, isAdminEmail } from "@/lib/supabase/server";
 
@@ -130,6 +131,51 @@ export async function setSongScan(
             { onConflict: "slug" },
           )
         ).error;
+  if (dbError) return { ok: false, error: `設定失敗：${dbError.message}` };
+
+  revalidateSong(slug);
+  return { ok: true };
+}
+
+/**
+ * Set (or clear, with `url === ""`) this song's YouTube reference video.
+ * Accepts any common YouTube URL. Admin only.
+ */
+export async function setSongMedia(
+  slug: string,
+  url: string,
+): Promise<EditResult> {
+  if (!SLUG_RE.test(slug)) return { ok: false, error: "無效的歌曲代號。" };
+
+  const clear = url.trim() === "";
+  const id = clear ? null : parseYouTubeId(url);
+  if (!clear && !id) {
+    return { ok: false, error: "看不懂這個 YouTube 連結。" };
+  }
+
+  const { user, error } = await requireAdmin();
+  if (error) return { ok: false, error };
+
+  let supabase;
+  try {
+    supabase = getAdminSupabase();
+  } catch {
+    return { ok: false, error: "伺服器未設定 Supabase。" };
+  }
+
+  const dbError = clear
+    ? (await supabase.from("song_media").delete().eq("slug", slug)).error
+    : (
+        await supabase.from("song_media").upsert(
+          {
+            slug,
+            youtube_id: id,
+            updated_at: new Date().toISOString(),
+            updated_by: user!.id,
+          },
+          { onConflict: "slug" },
+        )
+      ).error;
   if (dbError) return { ok: false, error: `設定失敗：${dbError.message}` };
 
   revalidateSong(slug);

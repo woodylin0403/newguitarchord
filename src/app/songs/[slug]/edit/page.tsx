@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { MediaPicker } from "@/components/MediaPicker";
 import { ScanPicker } from "@/components/ScanPicker";
 import { SongEditor } from "@/components/SongEditor";
 import { getSong } from "@/lib/songs/catalog";
@@ -9,6 +10,7 @@ import {
   getSongSource,
   hasContentOverride,
 } from "@/lib/songs/content";
+import { getSongMedia } from "@/lib/songs/media";
 import { getSongScans, SCAN_URL_BASE } from "@/lib/songs/scans";
 import { getSessionInfo } from "@/lib/supabase/server";
 
@@ -46,10 +48,11 @@ export default async function EditSongPage({
     );
   }
 
-  const [source, overridden, scans] = await Promise.all([
+  const [source, overridden, scans, media] = await Promise.all([
     getSongSource(slug),
     hasContentOverride(slug),
     getSongScans(slug),
+    getSongMedia(slug),
   ]);
 
   return (
@@ -76,6 +79,8 @@ export default async function EditSongPage({
           scans?.pinnedCrop ? `${SCAN_URL_BASE}/${scans.pinnedCrop}` : null
         }
       />
+
+      <MediaPicker slug={slug} initialId={media?.youtubeId ?? null} />
 
       {scans && scans.pageCrops.length > 0 &&
         (scans.pinnedCrop ? (
