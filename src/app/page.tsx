@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { AdminNewSongLink } from "@/components/AdminNewSongLink";
 import { SearchBox } from "@/components/SearchBox";
+import { Card } from "@/components/ui/card";
 import { parseKey } from "@/lib/music";
 import { CATALOG_KEYS, getCatalogByKey } from "@/lib/songs/catalog";
 import { getTranscribedSlugs } from "@/lib/songs/content";
@@ -52,18 +53,19 @@ export default async function HomePage() {
             const info = parseKey(key);
             const count = byKey.get(key)?.length ?? 0;
             return (
-              <Link
-                key={key}
-                href={`/keys/${key.toLowerCase()}`}
-                className="elevate group flex flex-col justify-between rounded-2xl border border-border bg-surface p-3.5 transition-colors hover:border-accent hover:bg-accent-soft"
-              >
-                <span className="font-mono text-2xl font-bold tracking-tight">
-                  {key}
-                </span>
-                <span className="mt-3 text-[11px] text-muted">
-                  {info?.mode === "minor" ? "小調" : "大調"} · {count}
-                </span>
-              </Link>
+              <Card key={key} asChild className="elevate">
+                <Link
+                  href={`/keys/${key.toLowerCase()}`}
+                  className="group flex flex-col justify-between p-3.5 outline-none transition-colors hover:border-accent hover:bg-accent-soft focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-ring/40"
+                >
+                  <span className="font-mono text-2xl font-bold tracking-tight transition-colors group-hover:text-accent">
+                    {key}
+                  </span>
+                  <span className="mt-3 text-[11px] text-muted">
+                    {info?.mode === "minor" ? "小調" : "大調"} · {count}
+                  </span>
+                </Link>
+              </Card>
             );
           })}
         </div>
