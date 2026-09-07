@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import { transposeKeyName, type ChordProDocument } from "@/lib/music";
+import { Button } from "@/components/ui/button";
 import { SongLine } from "./SongLine";
 
 const SECTION_LABELS: Record<string, string> = {
@@ -141,47 +142,58 @@ export function PerformanceView({
           </span>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             onClick={() => shift(-1)}
-            className="grid h-9 w-9 place-items-center rounded-full border border-border text-lg leading-none"
+            className="text-lg"
             aria-label="降半音"
           >
             ♭
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             onClick={() => shift(1)}
-            className="grid h-9 w-9 place-items-center rounded-full border border-border text-lg leading-none"
+            className="text-lg"
             aria-label="升半音"
           >
             ♯
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             onClick={text.decrease}
             disabled={!text.canDecrease}
-            className="grid h-9 w-9 place-items-center rounded-full border border-border text-xs leading-none disabled:opacity-35"
+            className="text-xs disabled:opacity-35"
             aria-label="縮小字級"
           >
             A−
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             onClick={text.increase}
             disabled={!text.canIncrease}
-            className="grid h-9 w-9 place-items-center rounded-full border border-border text-sm leading-none disabled:opacity-35"
+            className="text-sm disabled:opacity-35"
             aria-label="放大字級"
           >
             A+
-          </button>
-          <Link
-            href={`/songs/${slug}`}
-            aria-label="離開演奏模式"
-            className="grid h-9 w-9 place-items-center rounded-full border border-border text-lg leading-none"
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="icon"
+            className="text-lg"
           >
-            ✕
-          </Link>
+            <Link href={`/songs/${slug}`} aria-label="離開演奏模式">
+              ✕
+            </Link>
+          </Button>
         </div>
       </div>
 

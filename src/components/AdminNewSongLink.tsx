@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { Button } from "@/components/ui/button";
+
 /** "新增歌曲" link, shown only to admins. Fetches /api/me so the page stays SSG. */
 export function AdminNewSongLink() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -23,11 +25,8 @@ export function AdminNewSongLink() {
   if (!isAdmin) return null;
 
   return (
-    <Link
-      href="/songs/new"
-      className="rounded-full border border-border px-3 py-1 text-xs hover:bg-surface-2"
-    >
-      + 新增歌曲
-    </Link>
+    <Button asChild variant="outline" size="sm">
+      <Link href="/songs/new">+ 新增歌曲</Link>
+    </Button>
   );
 }

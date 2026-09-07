@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+
 interface Comment {
   id: string;
   body: string;
@@ -101,23 +104,23 @@ export function SongComments({ slug }: { slug: string }) {
 
       {me?.authenticated ? (
         <div className="space-y-2">
-          <textarea
+          <Textarea
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             rows={3}
             maxLength={4000}
             placeholder="寫下對這首歌的心得、和弦建議…"
-            className="w-full resize-y rounded-xl border border-border bg-surface p-3 text-sm outline-none focus:border-accent"
+            className="resize-y"
           />
           <div className="flex justify-end">
-            <button
+            <Button
               type="button"
+              size="sm"
               onClick={submit}
               disabled={busy || !draft.trim()}
-              className="rounded-full bg-accent px-4 py-1.5 text-sm font-medium text-accent-contrast disabled:opacity-40"
             >
               {busy ? "送出中…" : "送出"}
-            </button>
+            </Button>
           </div>
         </div>
       ) : (
@@ -162,13 +165,15 @@ export function SongComments({ slug }: { slug: string }) {
                   <span className="text-sm font-medium">{c.authorName}</span>
                   <span className="text-xs text-muted">{fmt(c.createdAt)}</span>
                   {canDelete && (
-                    <button
+                    <Button
                       type="button"
+                      variant="ghost"
+                      size="sm"
                       onClick={() => remove(c.id)}
-                      className="ml-auto text-xs text-muted hover:text-foreground"
+                      className="ml-auto h-auto px-2 py-0.5 text-xs text-muted"
                     >
                       刪除
-                    </button>
+                    </Button>
                   )}
                 </div>
                 <p className="whitespace-pre-wrap text-sm leading-relaxed">

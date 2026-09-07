@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { Button } from "@/components/ui/button";
+
 /** "編輯" link shown only to admins. Fetches /api/me so the song page stays SSG. */
 export function AdminEditLink({ slug }: { slug: string }) {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -23,11 +25,8 @@ export function AdminEditLink({ slug }: { slug: string }) {
   if (!isAdmin) return null;
 
   return (
-    <Link
-      href={`/songs/${slug}/edit`}
-      className="rounded-full border border-border px-3 py-1 text-xs hover:bg-surface-2"
-    >
-      編輯
-    </Link>
+    <Button asChild variant="outline" size="sm">
+      <Link href={`/songs/${slug}/edit`}>編輯</Link>
+    </Button>
   );
 }

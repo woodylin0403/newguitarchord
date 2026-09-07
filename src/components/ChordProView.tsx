@@ -15,6 +15,7 @@ import {
   transposeKeyName,
   type ChordProDocument,
 } from "@/lib/music";
+import { Button } from "@/components/ui/button";
 import { ChordDiagram } from "./ChordDiagram";
 import { SongLine } from "./SongLine";
 
@@ -135,53 +136,62 @@ export function ChordProView({
             )}
           </div>
           <div className="flex items-center gap-1.5">
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="icon"
               onClick={() => shift(-1)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-border text-xl leading-none active:bg-accent-soft"
+              className="size-10 text-xl active:bg-accent-soft"
               aria-label="降半音"
             >
               −
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
+              variant="outline"
               onClick={() => setSemitones(0)}
               disabled={semitones === 0}
-              className="h-10 rounded-full border border-border px-3 text-xs font-medium disabled:opacity-35"
+              className="h-10 px-3 text-xs disabled:opacity-35"
             >
               原調
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
+              variant="outline"
+              size="icon"
               onClick={() => shift(1)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-border text-xl leading-none active:bg-accent-soft"
+              className="size-10 text-xl active:bg-accent-soft"
               aria-label="升半音"
             >
               +
-            </button>
+            </Button>
           </div>
         </div>
 
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-1.5">
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="icon"
               onClick={text.decrease}
               disabled={!text.canDecrease}
-              className="grid h-8 w-8 place-items-center rounded-full border border-border text-xs leading-none disabled:opacity-35"
+              className="size-8 text-xs disabled:opacity-35"
               aria-label="縮小字級"
             >
               A<span className="text-[9px]">−</span>
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
+              variant="outline"
+              size="icon"
               onClick={text.increase}
               disabled={!text.canIncrease}
-              className="grid h-8 w-8 place-items-center rounded-full border border-border text-sm leading-none disabled:opacity-35"
+              className="size-8 text-sm disabled:opacity-35"
               aria-label="放大字級"
             >
               A<span className="text-[10px]">+</span>
-            </button>
+            </Button>
           </div>
           {capo.length > 0 && (
             <p className="flex flex-1 flex-wrap justify-end gap-x-3 gap-y-0.5 text-xs text-muted">

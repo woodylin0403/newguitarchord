@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { Input } from "@/components/ui/input";
+
 /** Title search input. Navigates to /search?q=… on submit. */
 export function SearchBox({
   defaultValue = "",
@@ -38,7 +40,7 @@ export function SearchBox({
         <circle cx="11" cy="11" r="7" />
         <path d="m21 21-4.3-4.3" />
       </svg>
-      <input
+      <Input
         type="search"
         name="q"
         value={value}
@@ -46,7 +48,7 @@ export function SearchBox({
         onChange={(e) => setValue(e.target.value)}
         placeholder="搜尋歌名…"
         aria-label="搜尋歌名"
-        className="w-full rounded-xl border border-border bg-surface py-3 pl-11 pr-4 text-base outline-none transition-colors placeholder:text-muted focus:border-accent"
+        className="h-auto rounded-xl py-3 pl-11 pr-4 text-base"
       />
     </form>
   );

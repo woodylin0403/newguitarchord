@@ -5,6 +5,11 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 
 import { CATALOG_KEYS, collectChords, parseChordPro } from "@/lib/music";
 import { createSong } from "@/app/songs/new/actions";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { NativeSelect } from "@/components/ui/native-select";
+import { Textarea } from "@/components/ui/textarea";
 import { ChartPreview } from "./ChartPreview";
 import { ChordPad } from "./ChordPad";
 
@@ -67,38 +72,46 @@ export function NewSongForm() {
   return (
     <div className="space-y-3">
       <div className="grid gap-3 sm:grid-cols-[1fr_auto_auto]">
-        <label className="text-sm">
-          <span className="mb-1 block text-xs text-muted">歌名</span>
-          <input
+        <div className="space-y-1">
+          <Label htmlFor="new-title" className="text-xs font-normal text-muted">
+            歌名
+          </Label>
+          <Input
+            id="new-title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="例：奇異恩典"
-            className="w-full rounded-lg border border-border bg-surface px-3 py-2 outline-none focus:border-accent"
           />
-        </label>
-        <label className="text-sm">
-          <span className="mb-1 block text-xs text-muted">原調</span>
-          <select
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor="new-key" className="text-xs font-normal text-muted">
+            原調
+          </Label>
+          <NativeSelect
+            id="new-key"
             value={key}
             onChange={(e) => setKey(e.target.value)}
-            className="rounded-lg border border-border bg-surface px-3 py-2 outline-none focus:border-accent"
+            className="w-full sm:w-auto"
           >
             {CATALOG_KEYS.map((k) => (
               <option key={k} value={k}>
                 {k}
               </option>
             ))}
-          </select>
-        </label>
-        <label className="text-sm">
-          <span className="mb-1 block text-xs text-muted">拍號</span>
-          <input
+          </NativeSelect>
+        </div>
+        <div className="space-y-1">
+          <Label htmlFor="new-time" className="text-xs font-normal text-muted">
+            拍號
+          </Label>
+          <Input
+            id="new-time"
             value={time}
             onChange={(e) => setTime(e.target.value)}
             placeholder="4/4"
-            className="w-20 rounded-lg border border-border bg-surface px-3 py-2 outline-none focus:border-accent"
+            className="w-full sm:w-20"
           />
-        </label>
+        </div>
       </div>
 
       <p className="text-xs text-muted">
@@ -109,12 +122,12 @@ export function NewSongForm() {
       <ChordPad songKey={key} usedChords={usedChords} onInsert={insertAtCursor} />
 
       <div className="grid gap-3 md:grid-cols-2">
-        <textarea
+        <Textarea
           ref={taRef}
           value={source}
           onChange={(e) => setEdited(e.target.value)}
           spellCheck={false}
-          className="h-[55vh] w-full resize-y rounded-xl border border-border bg-surface p-3 font-mono text-[13px] leading-relaxed outline-none focus:border-accent"
+          className="h-[55vh] resize-y font-mono text-[13px] leading-relaxed"
         />
         <div className="h-[55vh] overflow-y-auto rounded-xl border border-border bg-surface p-3">
           <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-muted">
@@ -130,14 +143,13 @@ export function NewSongForm() {
         </p>
       )}
 
-      <button
+      <Button
         type="button"
         onClick={submit}
         disabled={pending || !title.trim()}
-        className="rounded-full bg-accent px-5 py-2 text-sm font-medium text-accent-contrast disabled:opacity-40"
       >
         {pending ? "新增中…" : "新增歌曲"}
-      </button>
+      </Button>
     </div>
   );
 }
