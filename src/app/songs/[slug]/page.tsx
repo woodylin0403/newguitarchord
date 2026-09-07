@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { AdminEditLink } from "@/components/AdminEditLink";
 import { ChordProView } from "@/components/ChordProView";
+import { JsonLd } from "@/components/JsonLd";
 import { SongComments } from "@/components/SongComments";
 import { Badge } from "@/components/ui/badge";
 import { parseKey, suggestCapo } from "@/lib/music";
@@ -11,6 +12,7 @@ import { getAllSlugs, getSong } from "@/lib/songs/catalog";
 import { getSongDocument } from "@/lib/songs/content";
 import { keyLabel } from "@/lib/songs/labels";
 import { getSongScans } from "@/lib/songs/scans";
+import { SITE_NAME, SITE_URL, siteUrl } from "@/lib/site";
 
 // ISR: pages are prebuilt, but re-render in the background so site edits to
 // `song_contents` show up without a full rebuild.
@@ -66,8 +68,38 @@ export default async function SongPage({ params }: PageProps<"/songs/[slug]">) {
     song.bookPage ? `第 ${song.bookPage} 頁` : null,
   ].filter(Boolean) as string[];
 
+  const pageUrl = siteUrl(`/songs/${song.slug}`);
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicComposition",
+      name: song.title,
+      url: pageUrl,
+      inLanguage: "zh-Hant",
+      musicalKey: keyLabel(originalKey),
+      genre: "詩歌",
+      isAccessibleForFree: true,
+      isPartOf: { "@type": "WebSite", name: SITE_NAME, url: SITE_URL },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "全部", item: SITE_URL },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: keyLabel(song.key),
+          item: siteUrl(`/keys/${song.key.toLowerCase()}`),
+        },
+        { "@type": "ListItem", position: 3, name: song.title, item: pageUrl },
+      ],
+    },
+  ];
+
   return (
     <article className="space-y-5">
+      <JsonLd data={jsonLd} />
       <nav className="flex items-center gap-1.5 text-xs text-muted">
         <Link href="/" className="hover:text-foreground">
           全部

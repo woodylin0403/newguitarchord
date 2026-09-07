@@ -4,9 +4,10 @@ import { Figtree, Fraunces, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 import { AuthNav } from "@/components/AuthNav";
+import { JsonLd } from "@/components/JsonLd";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
-import { SITE_URL } from "@/lib/site";
+import { SITE_NAME, SITE_SHORT, SITE_URL } from "@/lib/site";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -27,9 +28,6 @@ const spaceMono = Space_Mono({
   display: "swap",
 });
 
-const SITE_NAME = "烏鴉的天空 詩歌吉他譜";
-const SITE_SHORT = "烏鴉的天空";
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -45,6 +43,25 @@ export const metadata: Metadata = {
 // Apply the saved theme before first paint to avoid a flash.
 const THEME_SCRIPT = `try{var t=localStorage.getItem('hymnbook.theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t}catch(e){}`;
 
+// Site-level structured data: names the site and wires up the search box so
+// Google can show a sitelinks search field.
+const SITE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  alternateName: SITE_SHORT,
+  url: SITE_URL,
+  inLanguage: "zh-Hant",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -54,6 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <JsonLd data={SITE_JSON_LD} />
       </head>
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur-md">
