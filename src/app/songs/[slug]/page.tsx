@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { AdminEditLink } from "@/components/AdminEditLink";
 import { ChordProView } from "@/components/ChordProView";
 import { SongComments } from "@/components/SongComments";
+import { Badge } from "@/components/ui/badge";
 import { parseKey, suggestCapo } from "@/lib/music";
 import { getAllSlugs, getSong } from "@/lib/songs/catalog";
 import { getSongDocument } from "@/lib/songs/content";
@@ -85,13 +86,10 @@ export default async function SongPage({ params }: PageProps<"/songs/[slug]">) {
           {song.title}
         </h1>
         <div className="flex flex-wrap items-center gap-1.5">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-md bg-surface-2 px-2 py-0.5 font-mono text-[11px] text-muted"
-            >
+          {tags.map((tag, i) => (
+            <Badge key={tag} variant={i === 0 ? "accent" : "default"}>
               {tag}
-            </span>
+            </Badge>
           ))}
           <div className="ml-auto flex items-center gap-1.5">
             <AdminEditLink slug={song.slug} />

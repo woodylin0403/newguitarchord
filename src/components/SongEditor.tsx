@@ -15,6 +15,10 @@ import {
   saveSongContent,
 } from "@/app/songs/[slug]/edit/actions";
 import { deleteSong } from "@/app/songs/new/actions";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { ChartPreview } from "./ChartPreview";
 import { ChordPad } from "./ChordPad";
 
@@ -126,26 +130,29 @@ export function SongEditor({
       />
 
       <div className="grid gap-3 md:grid-cols-2">
-        <textarea
+        <Textarea
           ref={taRef}
           value={source}
           onChange={(e) => setSource(e.target.value)}
           spellCheck={false}
-          className="h-[60vh] w-full resize-y rounded-xl border border-border bg-surface p-3 font-mono text-[13px] leading-relaxed outline-none focus:border-accent"
+          className="h-[60vh] resize-y font-mono text-[13px] leading-relaxed"
         />
         <div className="h-[60vh] overflow-y-auto rounded-xl border border-border bg-surface p-3">
           <div className="mb-2 flex items-center justify-between">
             <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted">
               預覽
             </span>
-            <label className="flex items-center gap-1.5 text-[11px] text-muted">
-              <input
-                type="checkbox"
+            <Label
+              htmlFor="mark-spaces"
+              className="text-[11px] font-normal text-muted"
+            >
+              <Checkbox
+                id="mark-spaces"
                 checked={markSpaces}
-                onChange={(e) => setMarkSpaces(e.target.checked)}
+                onCheckedChange={(v) => setMarkSpaces(v === true)}
               />
               標出和弦下的空白
-            </label>
+            </Label>
           </div>
           <ChartPreview document={doc} markSpaces={markSpaces} />
         </div>
@@ -158,41 +165,38 @@ export function SongEditor({
       )}
 
       <div className="flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          onClick={save}
-          disabled={pending || !dirty}
-          className="rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-contrast disabled:opacity-40"
-        >
+        <Button type="button" onClick={save} disabled={pending || !dirty}>
           {pending ? "處理中…" : "儲存"}
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant="outline"
           onClick={() => setSource(initialSource)}
           disabled={pending || !dirty}
-          className="rounded-full border border-border px-4 py-2 text-sm disabled:opacity-40"
         >
           復原變更
-        </button>
+        </Button>
         {isCustom ? (
-          <button
+          <Button
             type="button"
+            variant="destructive"
             onClick={remove}
             disabled={pending}
-            className="ml-auto rounded-full border border-border px-4 py-2 text-sm text-muted disabled:opacity-40"
+            className="ml-auto"
           >
             刪除整首
-          </button>
+          </Button>
         ) : (
           isOverridden && (
-            <button
+            <Button
               type="button"
+              variant="destructive"
               onClick={revert}
               disabled={pending}
-              className="ml-auto rounded-full border border-border px-4 py-2 text-sm text-muted disabled:opacity-40"
+              className="ml-auto"
             >
               刪除站上修改（回原始檔）
-            </button>
+            </Button>
           )
         )}
       </div>
