@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 
 import { CATALOG_KEYS, collectChords, parseChordPro } from "@/lib/music";
 import { createSong } from "@/app/songs/new/actions";
+import { OCR_DRAFT_KEY } from "@/lib/ocr/draft";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -41,6 +42,21 @@ export function NewSongForm() {
       pendingCursor.current = null;
     }
   }, [source]);
+
+  // Pick up a draft handed over from the 和弦圖轉譜 tool (once). setState is
+  // deferred to a microtask so it isn't called synchronously in the effect.
+  useEffect(() => {
+    let draft: string | null = null;
+    try {
+      draft = sessionStorage.getItem(OCR_DRAFT_KEY);
+      if (draft) sessionStorage.removeItem(OCR_DRAFT_KEY);
+    } catch {
+      /* ignore */
+    }
+    if (!draft) return;
+    const d = draft;
+    Promise.resolve().then(() => setEdited(d));
+  }, []);
 
   const insertAtCursor = (text: string) => {
     const ta = taRef.current;
