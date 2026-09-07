@@ -77,38 +77,35 @@ export async function convertChartImage(dataUrl: string): Promise<OcrResult> {
     return { ok: false, error: "圖片太大（上限 5 MB），請壓縮後再試。" };
   }
 
-  const client = new Anthropic();
+  const client = new Anthropic({ maxRetries: 1 });
   try {
-    // Streamed so the long-ish call doesn't trip the SDK's HTTP timeout;
-    // `medium` effort is the accuracy/latency sweet spot inside a 60s function.
-    const res = await client.messages
-      .stream({
-        model: MODEL,
-        max_tokens: 8000,
-        thinking: { type: "adaptive" },
-        output_config: { effort: "medium" },
-        messages: [
-          {
-            role: "user",
-            content: [
-              {
-                type: "image",
-                source: {
-                  type: "base64",
-                  media_type: mediaType as
-                    | "image/png"
-                    | "image/jpeg"
-                    | "image/webp"
-                    | "image/gif",
-                  data: b64,
-                },
+    // No extended thinking: it pushed the call past Vercel's 60s function
+    // limit. Accuracy now comes from the column-counting prompt alone.
+    const res = await client.messages.create({
+      model: MODEL,
+      max_tokens: 4096,
+      thinking: { type: "disabled" },
+      messages: [
+        {
+          role: "user",
+          content: [
+            {
+              type: "image",
+              source: {
+                type: "base64",
+                media_type: mediaType as
+                  | "image/png"
+                  | "image/jpeg"
+                  | "image/webp"
+                  | "image/gif",
+                data: b64,
               },
-              { type: "text", text: PROMPT },
-            ],
-          },
-        ],
-      })
-      .finalMessage();
+            },
+            { type: "text", text: PROMPT },
+          ],
+        },
+      ],
+    });
 
     if (res.stop_reason === "refusal") {
       return { ok: false, error: "Claude 無法處理這張圖，換一張更清楚的。" };
