@@ -10,7 +10,7 @@ export interface OcrResult {
   error?: string;
 }
 
-const MODEL = "claude-sonnet-5";
+const MODEL = "claude-opus-5";
 const MAX_BYTES = 5 * 1024 * 1024; // 5 MB after base64 decode
 const ALLOWED = new Set([
   "image/png",
@@ -20,28 +20,32 @@ const ALLOWED = new Set([
 ]);
 
 const PROMPT = [
-  "你是吉他和弦譜轉錄助手。附圖是一張「和弦圖」：和弦符號寫在歌詞上方，",
-  "每個和弦符號的第一個字元，垂直對齊它應該落下的那個歌詞字。",
+  "你是吉他和弦譜轉錄助手。附圖是一張「和弦圖」：每一段是「和弦列」在上、",
+  "「歌詞列」在下，和弦符號的左緣，垂直對齊它應該落下的那個歌詞字。",
   "",
-  "做法：對每一行，逐一看每個和弦符號在圖上的水平位置（它的左緣 x 座標），",
-  "找出正下方那一行歌詞裡「哪一個字」的位置最接近，[和弦] 就插在那個字的正前方。",
+  "轉成 ChordPro。重點在「對位」——請對每一組（和弦列 + 歌詞列）照這個步驟做：",
+  "1. 先把歌詞列完整讀出來。以「欄」為單位：一個全形中文字算 1 欄，一個半形空白算 1 欄。",
+  "2. 對和弦列裡的每一個和弦，看它的「左緣」在圖上水平對齊到歌詞的第幾欄（從 1 開始數）。",
+  "   —— 是用像素水平位置去比對和弦左緣 vs 每個字的左緣，不是看它是第幾個和弦。",
+  "3. 把 [和弦] 插在「第 N 欄那個字」的正前方。若第 N 欄剛好落在兩字之間的空白，",
+  "   寫成 [和弦] 再接一個半形空白，再接下一個字。",
+  "4. 若同一行有兩個和弦算到同一欄，把後面那個往後挪一欄。",
   "",
-  "特別注意第一個和弦：它常常不在該行第一個字的上方（左邊有一段縮排空白），",
-  "這時要把它插在它真正對齊的字前面，例如變成「哦[A]主」，",
-  "不要因為它是該行第一個和弦就放到行首。逐一比對每個和弦，不要整排往左推。",
+  "務必逐一核對每個和弦的水平位置，不要整排往左推。第一個和弦幾乎都不在行首",
+  "（左邊有一段縮排），要放到它真正對齊的字前面。做完再回頭比對一次圖再輸出。",
   "",
   "其他規則：",
-  "• 和弦寫成 [C]。和弦落在兩字之間的空白處時，寫成 [C] 再接一個半形空白，再接下一個字。",
-  "• 逐行輸出歌詞，保留原本的分行。",
   "• 和弦原樣保留，圖上寫什麼就輸出什麼（含 m7、maj7、sus、add、6、9、轉位 /G 等），不要簡化。",
+  "• 逐行輸出歌詞，保留原本的分行。",
   "• 圖最上方若有調號與拍號（例如「A 4/4」），第一行輸出 {key: A}，第二行 {time: 4/4}。",
   "• 有標題就輸出 {title: 標題}。",
   "• 出現 1. 2. 或「副歌」等段落標記時，用 {start_of_verse} / {start_of_chorus} 分段；沒有就不要加。",
   "",
   "只輸出 ChordPro 文字本身，不要任何說明、前後綴或 ``` 圍欄。",
   "",
-  "範例：某行歌詞「哦主 我神 你的聖名」，圖上 A 對齊「主」、C#m7 對齊「神」、D 對齊「你」，",
-  "輸出為： 哦[A]主 我[C#m7]神 [D]你的聖名",
+  "對位範例：歌詞列是「哦主 我神 你的聖名」（欄：哦=1 主=2 空=3 我=4 神=5 空=6 你=7…）。",
+  "和弦列裡 A 的左緣對齊第 2 欄、C#m7 對齊第 5 欄、D 對齊第 7 欄。",
+  "輸出： 哦[A]主 我[C#m7]神 [D]你的聖名",
 ].join("\n");
 
 /**
@@ -75,11 +79,11 @@ export async function convertChartImage(dataUrl: string): Promise<OcrResult> {
   try {
     const res = await client.messages.create({
       model: MODEL,
-      max_tokens: 8192,
-      // A little reasoning materially improves chord-to-syllable alignment
-      // (especially the first chord of a line); low effort keeps cost bounded.
+      max_tokens: 16000,
+      // Chord-to-syllable alignment is a fine visual-reasoning task — it needs
+      // room to think and check its work, so run Opus at high effort.
       thinking: { type: "adaptive" },
-      output_config: { effort: "low" },
+      output_config: { effort: "xhigh" },
       messages: [
         {
           role: "user",

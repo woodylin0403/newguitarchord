@@ -9,7 +9,7 @@ import {
   getSongSource,
   hasContentOverride,
 } from "@/lib/songs/content";
-import { getSongScans } from "@/lib/songs/scans";
+import { getSongScans, SCAN_URL_BASE } from "@/lib/songs/scans";
 import { getSessionInfo } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { robots: { index: false } };
@@ -69,15 +69,32 @@ export default async function EditSongPage({
         initialSource={source ?? TEMPLATE(song.title, song.key)}
         isOverridden={overridden}
         isCustom={song.source === "custom"}
+        scanUrl={
+          scans?.pinnedCrop ? `${SCAN_URL_BASE}/${scans.pinnedCrop}` : null
+        }
       />
 
-      {scans && scans.pageCrops.length > 0 && (
-        <ScanPicker
-          slug={slug}
-          crops={scans.pageCrops}
-          pinned={scans.pinnedCrop}
-        />
-      )}
+      {scans && scans.pageCrops.length > 0 &&
+        (scans.pinnedCrop ? (
+          <details className="rounded-xl border border-border bg-surface">
+            <summary className="cursor-pointer list-none px-3 py-2 text-xs font-semibold uppercase tracking-[0.15em] text-muted">
+              換一張掃描圖
+            </summary>
+            <div className="border-t border-border p-3">
+              <ScanPicker
+                slug={slug}
+                crops={scans.pageCrops}
+                pinned={scans.pinnedCrop}
+              />
+            </div>
+          </details>
+        ) : (
+          <ScanPicker
+            slug={slug}
+            crops={scans.pageCrops}
+            pinned={scans.pinnedCrop}
+          />
+        ))}
     </div>
   );
 }

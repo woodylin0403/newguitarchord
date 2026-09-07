@@ -34,17 +34,23 @@ export function SongEditor({
   initialSource,
   isOverridden,
   isCustom = false,
+  scanUrl = null,
 }: {
   slug: string;
   songKey: string;
   initialSource: string;
   isOverridden: boolean;
   isCustom?: boolean;
+  /** this song's own scan crop, shown beside the editor for proof-reading */
+  scanUrl?: string | null;
 }) {
   const router = useRouter();
   const [source, setSource] = useState(initialSource);
   const [msg, setMsg] = useState<string | null>(null);
   const [markSpaces, setMarkSpaces] = useState(true);
+  const [rightTab, setRightTab] = useState<"preview" | "scan">(
+    scanUrl ? "scan" : "preview",
+  );
   const [pending, startTransition] = useTransition();
 
   const taRef = useRef<HTMLTextAreaElement>(null);
@@ -160,23 +166,53 @@ export function SongEditor({
           className="h-[60vh] resize-y font-mono text-[13px] leading-relaxed"
         />
         <div className="h-[60vh] overflow-y-auto rounded-xl border border-border bg-surface p-3">
-          <div className="mb-2 flex items-center justify-between">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted">
-              預覽
-            </span>
-            <Label
-              htmlFor="mark-spaces"
-              className="text-[11px] font-normal text-muted"
-            >
-              <Checkbox
-                id="mark-spaces"
-                checked={markSpaces}
-                onCheckedChange={(v) => setMarkSpaces(v === true)}
-              />
-              標出和弦下的空白
-            </Label>
+          <div className="mb-2 flex items-center justify-between gap-2">
+            {scanUrl ? (
+              <div className="flex gap-1">
+                {(["scan", "preview"] as const).map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setRightTab(t)}
+                    className={`rounded-md px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.12em] ${
+                      rightTab === t
+                        ? "bg-accent-soft text-accent"
+                        : "text-muted hover:text-foreground"
+                    }`}
+                  >
+                    {t === "scan" ? "掃描圖" : "預覽"}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-muted">
+                預覽
+              </span>
+            )}
+            {rightTab === "preview" && (
+              <Label
+                htmlFor="mark-spaces"
+                className="text-[11px] font-normal text-muted"
+              >
+                <Checkbox
+                  id="mark-spaces"
+                  checked={markSpaces}
+                  onCheckedChange={(v) => setMarkSpaces(v === true)}
+                />
+                標出和弦下的空白
+              </Label>
+            )}
           </div>
-          <ChartPreview document={doc} markSpaces={markSpaces} />
+          {rightTab === "scan" && scanUrl ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={scanUrl}
+              alt={`${slug} 掃描圖`}
+              className="w-full rounded-lg border border-border bg-white"
+            />
+          ) : (
+            <ChartPreview document={doc} markSpaces={markSpaces} />
+          )}
         </div>
       </div>
 
