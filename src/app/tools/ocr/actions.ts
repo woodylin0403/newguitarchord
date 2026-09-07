@@ -10,7 +10,9 @@ export interface OcrResult {
   error?: string;
 }
 
-const MODEL = "claude-opus-5";
+// Sonnet 5, not Opus — this runs inside a Vercel function (60s cap) and Opus at
+// high effort routinely blew past it, leaving the UI stuck on "辨識中".
+const MODEL = "claude-sonnet-5";
 const MAX_BYTES = 5 * 1024 * 1024; // 5 MB after base64 decode
 const ALLOWED = new Set([
   "image/png",
@@ -77,34 +79,36 @@ export async function convertChartImage(dataUrl: string): Promise<OcrResult> {
 
   const client = new Anthropic();
   try {
-    const res = await client.messages.create({
-      model: MODEL,
-      max_tokens: 16000,
-      // Chord-to-syllable alignment is a fine visual-reasoning task — it needs
-      // room to think and check its work, so run Opus at high effort.
-      thinking: { type: "adaptive" },
-      output_config: { effort: "xhigh" },
-      messages: [
-        {
-          role: "user",
-          content: [
-            {
-              type: "image",
-              source: {
-                type: "base64",
-                media_type: mediaType as
-                  | "image/png"
-                  | "image/jpeg"
-                  | "image/webp"
-                  | "image/gif",
-                data: b64,
+    // Streamed so the long-ish call doesn't trip the SDK's HTTP timeout;
+    // `medium` effort is the accuracy/latency sweet spot inside a 60s function.
+    const res = await client.messages
+      .stream({
+        model: MODEL,
+        max_tokens: 8000,
+        thinking: { type: "adaptive" },
+        output_config: { effort: "medium" },
+        messages: [
+          {
+            role: "user",
+            content: [
+              {
+                type: "image",
+                source: {
+                  type: "base64",
+                  media_type: mediaType as
+                    | "image/png"
+                    | "image/jpeg"
+                    | "image/webp"
+                    | "image/gif",
+                  data: b64,
+                },
               },
-            },
-            { type: "text", text: PROMPT },
-          ],
-        },
-      ],
-    });
+              { type: "text", text: PROMPT },
+            ],
+          },
+        ],
+      })
+      .finalMessage();
 
     if (res.stop_reason === "refusal") {
       return { ok: false, error: "Claude 無法處理這張圖，換一張更清楚的。" };

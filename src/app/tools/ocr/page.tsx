@@ -6,6 +6,10 @@ import { getSessionInfo } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { robots: { index: false } };
 
+// The 和弦圖轉譜 server action calls Claude vision — give it room (Vercel caps
+// Hobby functions at 60s).
+export const maxDuration = 60;
+
 export default async function ChordOcrPage() {
   const { isAdmin, authenticated } = await getSessionInfo();
 

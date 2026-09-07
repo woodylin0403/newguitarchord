@@ -6,6 +6,9 @@ import { getSessionInfo } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { robots: { index: false } };
 
+// The embedded 和弦圖轉譜 panel calls a Claude-vision server action.
+export const maxDuration = 60;
+
 export default async function NewSongPage() {
   const { isAdmin, authenticated } = await getSessionInfo();
 

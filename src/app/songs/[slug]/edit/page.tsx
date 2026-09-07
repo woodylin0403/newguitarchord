@@ -14,6 +14,9 @@ import { getSessionInfo } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { robots: { index: false } };
 
+// The embedded 和弦圖轉譜 panel calls a Claude-vision server action.
+export const maxDuration = 60;
+
 const TEMPLATE = (title: string, key: string) =>
   `{title: ${title}}\n{key: ${key}}\n{time: 4/4}\n\n[${key}]第一行歌詞\n`;
 

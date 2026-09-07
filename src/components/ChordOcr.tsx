@@ -76,14 +76,24 @@ export function ChordOcr({
     if (!dataUrl) return;
     setMsg(null);
     setErr(false);
+    const slow = setTimeout(() => {
+      setMsg("辨識中…（較大或多首的圖會比較久，約 20～40 秒）");
+    }, 8000);
     startTransition(async () => {
-      const res = await convertChartImage(dataUrl);
-      if (res.ok && res.text) {
-        setOut(res.text);
-        setMsg("完成 —— 請對照原圖校對後再使用。");
-      } else {
+      try {
+        const res = await convertChartImage(dataUrl);
+        if (res.ok && res.text) {
+          setOut(res.text);
+          setMsg("完成 —— 請對照原圖校對後再使用。");
+        } else {
+          setErr(true);
+          setMsg(res.error ?? "轉換失敗");
+        }
+      } catch {
         setErr(true);
-        setMsg(res.error ?? "轉換失敗");
+        setMsg("辨識逾時或連線中斷。把圖裁成單首、縮小一點再試。");
+      } finally {
+        clearTimeout(slow);
       }
     });
   };
