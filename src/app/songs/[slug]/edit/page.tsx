@@ -63,9 +63,17 @@ export default async function EditSongPage({
         <span>編輯</span>
       </nav>
 
-      <h1 className="text-2xl font-bold tracking-tight">
-        編輯 · {song.title}
-      </h1>
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h1 className="text-2xl font-bold tracking-tight">
+          編輯 · {song.title}
+        </h1>
+        <Link
+          href="/help"
+          className="text-xs text-accent underline underline-offset-2"
+        >
+          編輯教學 →
+        </Link>
+      </div>
 
       <SongEditor
         slug={slug}

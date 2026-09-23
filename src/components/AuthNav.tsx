@@ -125,6 +125,9 @@ export function AuthNav() {
           </p>
         )}
         <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/help">編輯教學</Link>
+        </DropdownMenuItem>
         {canEdit && (
           <DropdownMenuItem asChild>
             <Link href="/songs/new">新增歌曲</Link>
@@ -138,7 +141,7 @@ export function AuthNav() {
             </Link>
           </DropdownMenuItem>
         )}
-        {(canEdit || isAdmin) && <DropdownMenuSeparator />}
+        <DropdownMenuSeparator />
         <DropdownMenuItem
           onSelect={async () => {
             await supabase.auth.signOut();
