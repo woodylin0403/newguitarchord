@@ -91,7 +91,7 @@ export function SongEditor({
   const save = () => {
     setMsg(null);
     startTransition(async () => {
-      const res = await saveSongContent(slug, source);
+      const res = await saveSongContent(slug, source, songKey);
       if (res.ok) {
         goFresh(`/songs/${slug}`);
       } else {
@@ -104,7 +104,7 @@ export function SongEditor({
     if (!confirm("確定要刪除站上的修改、回到原始檔案內容？")) return;
     setMsg(null);
     startTransition(async () => {
-      const res = await revertSongContent(slug);
+      const res = await revertSongContent(slug, songKey);
       if (res.ok) {
         goFresh(`/songs/${slug}`);
       } else {

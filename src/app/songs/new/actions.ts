@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { CATALOG_KEYS, isCatalogKey, parseChordPro } from "@/lib/music";
 import { nextSlugForKey } from "@/lib/songs/catalog";
 import { getAdminSupabase } from "@/lib/supabase/admin";
-import { getCurrentUser, isAdminEmail } from "@/lib/supabase/server";
+import { requireAdmin, requireEditor } from "@/lib/supabase/authz";
 
 export interface CreateResult {
   ok: boolean;
@@ -13,21 +13,15 @@ export interface CreateResult {
   error?: string;
 }
 
-async function requireAdmin() {
-  const user = await getCurrentUser();
-  if (!user || !isAdminEmail(user.email)) {
-    return { user: null, error: "沒有權限（需要管理員登入）。" };
-  }
-  return { user, error: null };
-}
-
+/** Add a new song. Editor/admin. */
 export async function createSong(input: {
   title: string;
   key: string;
   timeSignature: string;
   chordpro: string;
 }): Promise<CreateResult> {
-  const { user, error: authError } = await requireAdmin();
+  const { user, supabase: sessionSupabase, error: authError } =
+    await requireEditor();
   if (authError) return { ok: false, error: authError };
 
   const title = input.title.trim();
@@ -49,16 +43,18 @@ export async function createSong(input: {
     return { ok: false, error: "解析後沒有任何歌詞內容，請檢查格式。" };
   }
 
-  let supabase;
+  // The custom-songs catalog (`songs`) has no RLS policy of its own — write it
+  // with the service-role client after the app-level check above.
+  let adminSupabase;
   try {
-    supabase = getAdminSupabase();
+    adminSupabase = getAdminSupabase();
   } catch {
     return { ok: false, error: "伺服器未設定 Supabase。" };
   }
 
   const { slug, number } = await nextSlugForKey(input.key);
 
-  const { error: songError } = await supabase.from("songs").insert({
+  const { error: songError } = await adminSupabase.from("songs").insert({
     slug,
     title,
     music_key: input.key,
@@ -70,14 +66,18 @@ export async function createSong(input: {
     return { ok: false, error: `新增失敗：${songError.message}` };
   }
 
-  const { error: contentError } = await supabase.from("song_contents").insert({
-    slug,
-    chordpro: chordpro + "\n",
-    updated_by: user!.id,
-  });
+  // song_contents IS covered by RLS — write it with the caller's own session
+  // so `can_edit()` is the thing enforcing this, not an app-level check.
+  const { error: contentError } = await sessionSupabase!
+    .from("song_contents")
+    .insert({
+      slug,
+      chordpro: chordpro + "\n",
+      updated_by: user!.id,
+    });
   if (contentError) {
     // roll back the songs row so we don't leave a song with no content
-    await supabase.from("songs").delete().eq("slug", slug);
+    await adminSupabase.from("songs").delete().eq("slug", slug);
     return { ok: false, error: `新增失敗：${contentError.message}` };
   }
 
@@ -87,7 +87,7 @@ export async function createSong(input: {
   return { ok: true, slug };
 }
 
-/** Delete a site-added song (never a hymnal one). */
+/** Delete a site-added song (never a hymnal one). Admin only. */
 export async function deleteSong(slug: string): Promise<CreateResult> {
   const { error: authError } = await requireAdmin();
   if (authError) return { ok: false, error: authError };

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { getAdminSupabase } from "@/lib/supabase/admin";
-import { getServerSupabase, isAdminEmail } from "@/lib/supabase/server";
+import { getServerSupabase } from "@/lib/supabase/server";
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -37,7 +37,12 @@ export async function DELETE(
   }
 
   const isOwner = comment.user_id === user.id;
-  const isAdmin = isAdminEmail(user.email);
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+  const isAdmin = profile?.role === "admin";
   if (!isOwner && !isAdmin) {
     return NextResponse.json({ error: "沒有權限。" }, { status: 403 });
   }

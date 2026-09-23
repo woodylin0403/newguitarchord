@@ -2,7 +2,7 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 
-import { getCurrentUser, isAdminEmail } from "@/lib/supabase/server";
+import { requireEditor } from "@/lib/supabase/authz";
 
 export interface OcrResult {
   ok: boolean;
@@ -51,14 +51,12 @@ const PROMPT = [
 ].join("\n");
 
 /**
- * Convert a chord-chart image to ChordPro text via Claude vision. Admin only.
+ * Convert a chord-chart image to ChordPro text via Claude vision. Editor/admin.
  * `dataUrl` is a `data:image/...;base64,...` string from the browser.
  */
 export async function convertChartImage(dataUrl: string): Promise<OcrResult> {
-  const user = await getCurrentUser();
-  if (!user || !isAdminEmail(user.email)) {
-    return { ok: false, error: "沒有權限（需要管理員登入）。" };
-  }
+  const { error: authError } = await requireEditor();
+  if (authError) return { ok: false, error: authError };
 
   if (!process.env.ANTHROPIC_API_KEY) {
     return { ok: false, error: "伺服器未設定 ANTHROPIC_API_KEY。" };

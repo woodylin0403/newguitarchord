@@ -2,10 +2,18 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
+import type { Role } from "@/lib/roles";
+
+export type { Role };
+
 /**
  * Cookie-bound Supabase client for Server Components, route handlers and server
  * actions — carries the signed-in user's session. Returns null when Supabase
  * env vars are absent.
+ *
+ * Writes to `song_contents` and `profiles.role` go through THIS client, never
+ * the service-role one — RLS (`can_edit()` / `is_admin()`) is the real gate,
+ * not an app-level check.
  */
 export async function getServerSupabase(): Promise<SupabaseClient | null> {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -45,19 +53,68 @@ export async function getCurrentUser() {
   return user;
 }
 
+/** This user's `profiles.role`, or null if signed out / no row / Supabase off. */
+export async function getCurrentRole(): Promise<Role | null> {
+  const supabase = await getServerSupabase();
+  if (!supabase) return null;
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .maybeSingle();
+  if (error || !data?.role) return null;
+  return data.role as Role;
+}
+
 export interface SessionInfo {
   authenticated: boolean;
   userId: string | null;
   email: string | null;
   name: string | null;
   avatarUrl: string | null;
+  /** null when signed out, or signed in with no profiles row yet. */
+  role: Role | null;
+  /** role === "editor" || role === "admin" */
+  canEdit: boolean;
   isAdmin: boolean;
 }
 
 /** Current session distilled to what the UI needs. */
 export async function getSessionInfo(): Promise<SessionInfo> {
-  const user = await getCurrentUser();
+  const supabase = await getServerSupabase();
+  if (!supabase) {
+    return {
+      authenticated: false,
+      userId: null,
+      email: null,
+      name: null,
+      avatarUrl: null,
+      role: null,
+      canEdit: false,
+      isAdmin: false,
+    };
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   const meta = (user?.user_metadata ?? {}) as Record<string, unknown>;
+
+  let role: Role | null = null;
+  if (user) {
+    const { data } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .maybeSingle();
+    role = (data?.role as Role | undefined) ?? null;
+  }
+
   return {
     authenticated: Boolean(user),
     userId: user?.id ?? null,
@@ -68,16 +125,8 @@ export async function getSessionInfo(): Promise<SessionInfo> {
       user?.email?.split("@")[0] ??
       null,
     avatarUrl: (meta.avatar_url as string) ?? (meta.picture as string) ?? null,
-    isAdmin: isAdminEmail(user?.email),
+    role,
+    canEdit: role === "editor" || role === "admin",
+    isAdmin: role === "admin",
   };
-}
-
-/** Comma-separated ADMIN_EMAILS env var, lower-cased. */
-export function isAdminEmail(email: string | null | undefined): boolean {
-  if (!email) return false;
-  const list = (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((e) => e.trim().toLowerCase())
-    .filter(Boolean);
-  return list.includes(email.toLowerCase());
 }

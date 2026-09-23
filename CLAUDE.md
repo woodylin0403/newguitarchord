@@ -244,6 +244,20 @@
 - `ChordPad`（`src/components/ChordPad.tsx`）：點和弦鈕在游標處插入 `[X]`。三排：**本曲**（`collectChords`）、**此調**（`diatonicChords(key)` — 六個順階和弦 + V7）、**其他**（12 個根音 × 大/小/7/m7/maj7）＋「空白」鈕。
 - `diatonicChords` 在 `src/lib/music/keys.ts`，有測試。
 
+## 權限系統（角色制，取代 `ADMIN_EMAILS`）
+
+`ADMIN_EMAILS` 已停用（`isAdminEmail()` 移除）。權限改成資料庫驅動：
+
+- `profiles.role`：`'pending' | 'editor' | 'admin'`。註冊時 trigger 自動建立、預設 `pending`。
+- `song_revisions(id, slug, chordpro, edited_by, edited_at)`：`song_contents` 變動時由 **DB trigger** 自動寫入，**程式碼不 insert 這張表**。
+- RLS 是真正的權限邊界（`can_edit()` / `is_admin()`）：`song_contents`、`profiles.role` 的寫入一律用**登入者自己的 session client**（`getServerSupabase()`），不用 `service_role` 繞過。`song_scans` / `song_media` / `songs`（站上新增歌曲目錄）沒有對應 RLS，維持 `service_role` + 程式碼檢查的舊模式。
+- `src/lib/roles.ts`：純 `Role` 型別 + 中文標籤，client/server 都能 import。
+- `src/lib/supabase/server.ts` 的 `getSessionInfo()` 回傳 `role` / `canEdit`（editor 或 admin）/ `isAdmin`。
+- `src/lib/supabase/authz.ts`：`requireEditor()` / `requireAdmin()`，server action 共用，回傳 session client（不是安全邊界本身，只是給清楚的中文錯誤訊息）。
+- `/admin/users`：管理員核准（pending→editor）/ 撤銷（editor→pending）；admin 角色沒有降級按鈕（規格沒定義這個流程）。
+- 編輯頁的「編輯紀錄」（`RevisionHistory`）：讀 `song_revisions`，逐行 diff（`src/lib/diff.ts`，用 `diff`/jsdiff 套件）跟前一版比較；admin 可還原到任一版本（`restoreRevision`，寫回 `song_contents`，觸發 trigger 自動記一筆新紀錄）。
+- Nav（`AuthNav`）：未登入「用 Google 登入」；`pending` 顯示「待核准」徽章、選單提示等待核准；`editor` 選單多「新增歌曲」；`admin` 再多「使用者管理」。
+
 ## 本機預覽
 
 ```bash

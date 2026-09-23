@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { MediaPicker } from "@/components/MediaPicker";
+import { NoAccess } from "@/components/NoAccess";
+import { RevisionHistory } from "@/components/RevisionHistory";
 import { ScanPicker } from "@/components/ScanPicker";
 import { SongEditor } from "@/components/SongEditor";
 import { getSong } from "@/lib/songs/catalog";
@@ -11,6 +13,7 @@ import {
   hasContentOverride,
 } from "@/lib/songs/content";
 import { getSongMedia } from "@/lib/songs/media";
+import { listRevisions } from "@/lib/songs/revisions";
 import { getSongScans, SCAN_URL_BASE } from "@/lib/songs/scans";
 import { getSessionInfo } from "@/lib/supabase/server";
 
@@ -29,30 +32,25 @@ export default async function EditSongPage({
   const song = await getSong(slug);
   if (!song) notFound();
 
-  const { isAdmin, authenticated } = await getSessionInfo();
-  if (!isAdmin) {
+  const { canEdit, isAdmin, authenticated, role } = await getSessionInfo();
+  if (!canEdit) {
     return (
-      <div className="space-y-3 py-10 text-center">
-        <p className="text-sm text-muted">
-          {authenticated
-            ? "這個帳號不是管理員，無法編輯。"
-            : "請先用管理員 Google 帳號登入。"}
-        </p>
-        <Link
-          href={`/songs/${slug}`}
-          className="inline-block text-sm text-accent underline"
-        >
-          回到歌曲頁
-        </Link>
-      </div>
+      <NoAccess
+        authenticated={authenticated}
+        role={role}
+        need="editor"
+        backHref={`/songs/${slug}`}
+        backLabel="回到歌曲頁"
+      />
     );
   }
 
-  const [source, overridden, scans, media] = await Promise.all([
+  const [source, overridden, scans, media, revisions] = await Promise.all([
     getSongSource(slug),
     hasContentOverride(slug),
     getSongScans(slug),
     getSongMedia(slug),
+    listRevisions(slug),
   ]);
 
   return (
@@ -81,6 +79,14 @@ export default async function EditSongPage({
       />
 
       <MediaPicker slug={slug} initialId={media?.youtubeId ?? null} />
+
+      <RevisionHistory
+        slug={slug}
+        songKey={song.key}
+        revisions={revisions}
+        currentSource={source ?? TEMPLATE(song.title, song.key)}
+        isAdmin={isAdmin}
+      />
 
       {scans && scans.pageCrops.length > 0 &&
         (scans.pinnedCrop ? (

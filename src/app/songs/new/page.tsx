@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { NewSongForm } from "@/components/NewSongForm";
+import { NoAccess } from "@/components/NoAccess";
 import { getSessionInfo } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { robots: { index: false } };
@@ -10,21 +11,10 @@ export const metadata: Metadata = { robots: { index: false } };
 export const maxDuration = 60;
 
 export default async function NewSongPage() {
-  const { isAdmin, authenticated } = await getSessionInfo();
+  const { canEdit, authenticated, role } = await getSessionInfo();
 
-  if (!isAdmin) {
-    return (
-      <div className="space-y-3 py-10 text-center">
-        <p className="text-sm text-muted">
-          {authenticated
-            ? "這個帳號不是管理員，無法新增歌曲。"
-            : "請先用管理員 Google 帳號登入。"}
-        </p>
-        <Link href="/" className="inline-block text-sm text-accent underline">
-          回首頁
-        </Link>
-      </div>
-    );
+  if (!canEdit) {
+    return <NoAccess authenticated={authenticated} role={role} need="editor" />;
   }
 
   return (
