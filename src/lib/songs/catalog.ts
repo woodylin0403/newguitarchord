@@ -12,7 +12,8 @@ import path from "node:path";
 import { cache } from "react";
 
 import { CATALOG_KEYS, isCatalogKey, type CatalogKey } from "@/lib/music";
-import { getPublicSupabase } from "@/lib/supabase/public";
+import { CACHE_TAG } from "@/lib/cache-tags";
+import { getTaggedSupabase } from "@/lib/supabase/public";
 import { filterByTitle, groupByKey, parseCatalog } from "./parse";
 import type { RawCatalog, SongSummary } from "./types";
 
@@ -20,7 +21,7 @@ const CATALOG_PATH = path.join(process.cwd(), "data", "songs.json");
 
 /** Songs added on the site, from the `songs` table. Empty if Supabase is off. */
 const loadCustomSongs = cache(async (): Promise<SongSummary[]> => {
-  const supabase = getPublicSupabase();
+  const supabase = getTaggedSupabase(CACHE_TAG.songs);
   if (!supabase) return [];
   try {
     const { data, error } = await supabase

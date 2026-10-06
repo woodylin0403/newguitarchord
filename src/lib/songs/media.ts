@@ -6,7 +6,8 @@
 
 import { cache } from "react";
 
-import { getPublicSupabase } from "@/lib/supabase/public";
+import { CACHE_TAG } from "@/lib/cache-tags";
+import { getTaggedSupabase } from "@/lib/supabase/public";
 
 export { parseYouTubeId } from "@/lib/youtube";
 
@@ -17,7 +18,7 @@ export interface SongMedia {
 /** The reference video for a song, or null. Empty if Supabase is off. */
 export const getSongMedia = cache(
   async (slug: string): Promise<SongMedia | null> => {
-    const supabase = getPublicSupabase();
+    const supabase = getTaggedSupabase(CACHE_TAG.media);
     if (!supabase) return null;
     try {
       const { data, error } = await supabase

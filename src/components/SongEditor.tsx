@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import {
   useEffect,
   useMemo,
@@ -44,7 +43,6 @@ export function SongEditor({
   /** this song's own scan crop, shown beside the editor for proof-reading */
   scanUrl?: string | null;
 }) {
-  const router = useRouter();
   const [source, setSource] = useState(initialSource);
   const [msg, setMsg] = useState<string | null>(null);
   const [markSpaces, setMarkSpaces] = useState(true);
@@ -81,22 +79,14 @@ export function SongEditor({
     ta?.focus();
   };
 
-  // Clear the client router cache first, THEN navigate — otherwise the push
-  // can render the copy of the target page cached from before this edit.
-  const goFresh = (path: string) => {
-    router.refresh();
-    router.push(path);
-  };
-
+  // On success these actions expire the cached data and redirect from the
+  // server, so the song page arrives already fresh. A value only comes back
+  // when something failed.
   const save = () => {
     setMsg(null);
     startTransition(async () => {
       const res = await saveSongContent(slug, source, songKey);
-      if (res.ok) {
-        goFresh(`/songs/${slug}`);
-      } else {
-        setMsg(res.error ?? "儲存失敗");
-      }
+      if (res && !res.ok) setMsg(res.error ?? "儲存失敗");
     });
   };
 
@@ -105,11 +95,7 @@ export function SongEditor({
     setMsg(null);
     startTransition(async () => {
       const res = await revertSongContent(slug, songKey);
-      if (res.ok) {
-        goFresh(`/songs/${slug}`);
-      } else {
-        setMsg(res.error ?? "還原失敗");
-      }
+      if (res && !res.ok) setMsg(res.error ?? "還原失敗");
     });
   };
 
@@ -118,11 +104,7 @@ export function SongEditor({
     setMsg(null);
     startTransition(async () => {
       const res = await deleteSong(slug);
-      if (res.ok) {
-        goFresh("/");
-      } else {
-        setMsg(res.error ?? "刪除失敗");
-      }
+      if (res && !res.ok) setMsg(res.error ?? "刪除失敗");
     });
   };
 

@@ -1,7 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
+import { CACHE_TAG } from "@/lib/cache-tags";
 import { CATALOG_KEYS, isCatalogKey, parseChordPro } from "@/lib/music";
 import { nextSlugForKey } from "@/lib/songs/catalog";
 import { getAdminSupabase } from "@/lib/supabase/admin";
@@ -81,10 +83,12 @@ export async function createSong(input: {
     return { ok: false, error: `新增失敗：${contentError.message}` };
   }
 
+  updateTag(CACHE_TAG.songs);
+  updateTag(CACHE_TAG.contents);
   revalidatePath("/");
   revalidatePath(`/keys/${input.key.toLowerCase()}`);
   revalidatePath(`/songs/${slug}`);
-  return { ok: true, slug };
+  redirect(`/songs/${slug}`);
 }
 
 /** Delete a site-added song (never a hymnal one). Admin only. */
@@ -113,9 +117,11 @@ export async function deleteSong(slug: string): Promise<CreateResult> {
   const { error } = await supabase.from("songs").delete().eq("slug", slug);
   if (error) return { ok: false, error: `刪除失敗：${error.message}` };
 
+  updateTag(CACHE_TAG.songs);
+  updateTag(CACHE_TAG.contents);
   revalidatePath("/");
   if (typeof row.music_key === "string") {
     revalidatePath(`/keys/${row.music_key.toLowerCase()}`);
   }
-  return { ok: true };
+  redirect("/");
 }

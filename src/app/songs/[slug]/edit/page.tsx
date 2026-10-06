@@ -76,6 +76,8 @@ export default async function EditSongPage({
       </div>
 
       <SongEditor
+        // remount with the new text after a restore (a new revision row appears)
+        key={revisions[0]?.id ?? "seed"}
         slug={slug}
         songKey={song.key}
         initialSource={source ?? TEMPLATE(song.title, song.key)}

@@ -14,15 +14,16 @@ import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { cache } from "react";
 
+import { CACHE_TAG } from "@/lib/cache-tags";
 import { parseChordPro, type ChordProDocument } from "@/lib/music";
-import { getPublicSupabase } from "@/lib/supabase/public";
+import { getTaggedSupabase } from "@/lib/supabase/public";
 
 const CONTENT_DIR = path.join(process.cwd(), "data", "songs");
 const SLUG_RE = /^[a-z]+-\d+$/;
 
 /** All site-edited ChordPro texts, keyed by slug. Empty when Supabase is off. */
 const loadOverrides = cache(async (): Promise<Map<string, string>> => {
-  const supabase = getPublicSupabase();
+  const supabase = getTaggedSupabase(CACHE_TAG.contents);
   if (!supabase) return new Map();
   try {
     const { data, error } = await supabase

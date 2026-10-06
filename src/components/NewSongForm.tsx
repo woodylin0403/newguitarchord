@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 
 import { CATALOG_KEYS, collectChords, parseChordPro } from "@/lib/music";
@@ -20,7 +19,6 @@ function template(title: string, key: string) {
 }
 
 export function NewSongForm() {
-  const router = useRouter();
   const [title, setTitle] = useState("");
   const [key, setKey] = useState<string>("C");
   const [time, setTime] = useState("4/4");
@@ -77,12 +75,8 @@ export function NewSongForm() {
         timeSignature: time,
         chordpro: source,
       });
-      if (res.ok && res.slug) {
-        router.refresh();
-        router.push(`/songs/${res.slug}`);
-      } else {
-        setMsg(res.error ?? "新增失敗");
-      }
+      // success redirects from the server; a value only comes back on failure
+      if (res && !res.ok) setMsg(res.error ?? "新增失敗");
     });
   };
 

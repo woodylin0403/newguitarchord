@@ -1,7 +1,9 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
+import { CACHE_TAG } from "@/lib/cache-tags";
 import { parseChordPro } from "@/lib/music";
 import { parseYouTubeId } from "@/lib/youtube";
 import { getAdminSupabase } from "@/lib/supabase/admin";
@@ -14,8 +16,14 @@ export interface EditResult {
   error?: string;
 }
 
+/**
+ * After a write: expire the cached rows (`updateTag` → the next render waits
+ * for fresh data instead of serving the stale copy) and re-render the pages
+ * that show this song.
+ */
 function revalidateSong(slug: string, songKey?: string) {
   revalidatePath(`/songs/${slug}`);
+  revalidatePath(`/songs/${slug}/edit`);
   revalidatePath(`/songs/${slug}/play`);
   revalidatePath("/");
   if (songKey) revalidatePath(`/keys/${songKey.toLowerCase()}`);
@@ -53,8 +61,9 @@ export async function saveSongContent(
   );
   if (dbError) return { ok: false, error: dbErrorMessage("儲存", dbError) };
 
+  updateTag(CACHE_TAG.contents);
   revalidateSong(slug, songKey);
-  return { ok: true };
+  redirect(`/songs/${slug}`);
 }
 
 /** Remove the site override so the song falls back to its seed .chordpro file. */
@@ -73,8 +82,9 @@ export async function revertSongContent(
     .eq("slug", slug);
   if (dbError) return { ok: false, error: dbErrorMessage("還原", dbError) };
 
+  updateTag(CACHE_TAG.contents);
   revalidateSong(slug, songKey);
-  return { ok: true };
+  redirect(`/songs/${slug}`);
 }
 
 /**
@@ -112,6 +122,7 @@ export async function restoreRevision(
   );
   if (dbError) return { ok: false, error: dbErrorMessage("還原", dbError) };
 
+  updateTag(CACHE_TAG.contents);
   revalidateSong(slug, songKey);
   return { ok: true };
 }
@@ -155,6 +166,7 @@ export async function setSongScan(
         ).error;
   if (dbError) return { ok: false, error: `設定失敗：${dbError.message}` };
 
+  updateTag(CACHE_TAG.scans);
   revalidateSong(slug);
   return { ok: true };
 }
@@ -200,6 +212,7 @@ export async function setSongMedia(
       ).error;
   if (dbError) return { ok: false, error: `設定失敗：${dbError.message}` };
 
+  updateTag(CACHE_TAG.media);
   revalidateSong(slug);
   return { ok: true };
 }

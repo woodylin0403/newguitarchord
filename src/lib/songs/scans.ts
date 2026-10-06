@@ -16,7 +16,8 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { cache } from "react";
 
-import { getPublicSupabase } from "@/lib/supabase/public";
+import { CACHE_TAG } from "@/lib/cache-tags";
+import { getTaggedSupabase } from "@/lib/supabase/public";
 
 /** Public path prefix for files in `public/scans/`. */
 export const SCAN_URL_BASE = "/scans";
@@ -70,7 +71,7 @@ const loadScanMap = cache(async (): Promise<Record<string, string>> => {
 
 /** Editor-set pins from the `song_scans` table. Empty if Supabase is off. */
 const loadScanOverrides = cache(async (): Promise<Record<string, string>> => {
-  const supabase = getPublicSupabase();
+  const supabase = getTaggedSupabase(CACHE_TAG.scans);
   if (!supabase) return {};
   try {
     const { data, error } = await supabase
