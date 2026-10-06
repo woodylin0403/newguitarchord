@@ -7,6 +7,7 @@ import { convertChartImage } from "@/app/tools/ocr/actions";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { OCR_DRAFT_KEY } from "@/lib/ocr/draft";
+import { alignOnImage } from "@/lib/ocr/measure";
 import { cn } from "@/lib/utils";
 
 const MAX_BYTES = 5 * 1024 * 1024;
@@ -102,9 +103,21 @@ export function ChordOcr({
     startTransition(async () => {
       try {
         const res = await convertChartImage(dataUrl);
-        if (res.ok && res.text) {
-          setOut(res.text);
-          setMsg("完成 —— 請對照原圖校對後再使用。");
+        if (res.ok && res.chart) {
+          // The model only read the text; chord positions are measured here.
+          const { chordpro, measured, needed } = await alignOnImage(
+            dataUrl,
+            res.chart,
+          );
+          setOut(chordpro);
+          if (measured < needed) {
+            setErr(true);
+            setMsg(
+              `完成，但有 ${needed - measured} 行量不到位置，那幾行的和弦是 AI 估的，請特別對照原圖。`,
+            );
+          } else {
+            setMsg("完成 —— 和弦位置是從圖上量出來的，還是請對照原圖看一眼。");
+          }
         } else {
           setErr(true);
           setMsg(res.error ?? "轉換失敗");
