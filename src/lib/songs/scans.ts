@@ -28,6 +28,12 @@ interface RawManifestEntry {
   full_page: string | null;
   candidates: { song_id: string; title: string }[];
   clean_cut: boolean;
+  /**
+   * Crops that held several songs and were split into per-song pieces by
+   * scripts/split-scans.ts. No longer offered in the picker, but a pin made
+   * before the split still resolves.
+   */
+  retired_images?: string[];
 }
 
 export interface SongScans {
@@ -101,8 +107,17 @@ export const getSongScans = cache(
       loadScanMap(),
     ]);
 
-    const pin = overrides[slug] ?? map[slug] ?? null;
-    const pinnedCrop = pin && entry.images.includes(pin) ? pin : null;
+    // Editor pin first, then the checked-in map — but a pin to a current crop
+    // beats one to a retired multi-song crop (e.g. an editor pinned the old
+    // combined image before it was split; the map has the exact piece).
+    const pins = [overrides[slug], map[slug]].filter(
+      (p): p is string => typeof p === "string",
+    );
+    const retired = entry.retired_images ?? [];
+    const pinnedCrop =
+      pins.find((p) => entry.images.includes(p)) ??
+      pins.find((p) => retired.includes(p)) ??
+      null;
 
     return {
       bookPage: entry.book_page,

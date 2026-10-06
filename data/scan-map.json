@@ -111,5 +111,59 @@
   "d-65": "P22_R2.png",
   "d-66": "P22_L5.png",
 
-  "d-67": "P23_L1.png"
+  "d-67": "P23_L1.png",
+
+  "_comment_split": "以下由 scripts/split-scans.ts 把一張多首的裁切圖切成一首一張後釘上（對照每張的標題列：原調+編號）。",
+  "d-1": "P13_L1a.png",
+  "d-3": "P13_L1b.png",
+  "d-5": "P13_L1c.png",
+  "d-7": "P13_L1d.png",
+
+  "d-19": "P15_L2a.png",
+  "d-21": "P15_L2b.png",
+
+  "d-42": "P19_L2a.png",
+  "d-44": "P19_L2b.png",
+
+  "d-57": "P21_L3a.png",
+  "d-59": "P21_L3b.png",
+
+  "e-21": "P27_L1a.png",
+  "e-23": "P27_L1b.png",
+
+  "g-1": "P37_L1a.png",
+  "g-4": "P37_L1b.png",
+
+  "g-17": "P39_L1a.png",
+  "g-19": "P39_L1b.png",
+  "g-20": "P39_L1c.png",
+  "g-22": "P39_L1d.png",
+
+  "g-30": "P41_L1a.png",
+  "g-33": "P41_L1b.png",
+  "g-35": "P41_L1c.png",
+  "g-31": "P41_L1d.png",
+  "g-32": "P41_L1e.png",
+  "g-34": "P41_L1f.png",
+
+  "g-43": "P43_L1a.png",
+  "g-46": "P43_L1b.png",
+  "g-49": "P43_L1c.png",
+
+  "em-8": "P47_L1a.png",
+  "em-10": "P47_L1b.png",
+  "em-9": "P47_L1c.png",
+
+  "a-8": "P49_L1a.png",
+  "a-10": "P49_L1b.png",
+  "a-12": "P49_L1c.png",
+  "a-14": "P49_L1d.png",
+
+  "a-21": "P51_L1a.png",
+  "a-24": "P51_L1b.png",
+  "a-26": "P51_L1c.png",
+  "a-22": "P51_L1d.png",
+  "a-23": "P51_L1e.png",
+  "a-25": "P51_L1f.png",
+  "a-27": "P51_L1g.png"
 }

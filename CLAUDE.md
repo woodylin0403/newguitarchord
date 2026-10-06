@@ -63,6 +63,8 @@
 
 - `P<頁碼>_L<n>.png` / `P<頁碼>_R<n>.png`：單行裁切圖（左欄 / 右欄第 n 行）。
 - `page_P<頁碼>.png`：整頁掃描。
+- `P<頁碼>_L<n><a|b|c…>.png`：`scripts/split-scans.ts` 把「一張塞了好幾首」的裁切圖（含整頁兩欄的）切成一首一張。原圖移到該頁 manifest 的 `retired_images`（選圖器不再列出，但舊的釘選仍有效；`getSongScans` 會優先用現行切片）。切片已依標題列（原調＋編號）釘進 `data/scan-map.json`。只處理 `clean_cut: false` 的頁面；可重跑。
+  - 已知未處理：少數 `clean_cut: true` 的頁面有「從歌曲中間切斷」的裁切圖（例如 `P05_L5` 開頭是上一首的結尾），這種不是多首合一、腳本不會動。
 
 轉錄時用這些圖當校對依據。
 
